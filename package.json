@@ -1,0 +1,25 @@
+{
+  "name": "rustica-landing",
+  "version": "1.0.0",
+  "description": "Landing page Restaurante Rústica — base para tema WordPress",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "dev": "npx live-server src --port=3000 --no-browser",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "test:ci": "vitest run --coverage --reporter=verbose",
+    "test:e2e": "playwright test",
+    "lint": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0",
+    "@types/bootstrap": "^5.2.10",
+    "vitest": "^1.6.0",
+    "@vitest/coverage-v8": "^1.6.0",
+    "jsdom": "^24.0.0",
+    "@playwright/test": "^1.44.0",
+    "live-server": "^1.2.2"
+  }
+}

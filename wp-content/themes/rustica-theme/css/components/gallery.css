@@ -1,0 +1,99 @@
+/* === GALERÍA === */
+#galeria {
+  background-color: var(--rustica-cream);
+}
+
+.gallery-tabs .nav-link {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--rustica-muted);
+  border: 2px solid transparent;
+  border-radius: var(--radius-pill);
+  padding: 0.6rem 1.8rem;
+  transition: color var(--transition-fast), border-color var(--transition-fast), background-color var(--transition-fast);
+}
+
+.gallery-tabs .nav-link.active,
+.gallery-tabs .nav-link:hover {
+  color: var(--rustica-siena);
+  border-color: var(--rustica-siena);
+  background-color: transparent;
+}
+
+.gallery-tabs .nav-link.active {
+  background-color: var(--rustica-siena);
+  color: #fff;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-md);
+}
+
+@media (min-width: 768px) {
+  .gallery-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  aspect-ratio: 1 / 1;
+  cursor: pointer;
+  background-color: var(--rustica-sand);
+}
+
+.gallery-item .gallery-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-slow);
+}
+
+.gallery-item:hover .gallery-img {
+  transform: scale(1.08);
+}
+
+.gallery-item::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(46,42,38,0);
+  transition: background var(--transition-base);
+}
+
+.gallery-item:hover::after {
+  background: rgba(46,42,38,0.2);
+}
+
+/* Modal lightbox */
+#galleryModal .modal-content {
+  background-color: rgba(0,0,0,0.92);
+  border: none;
+}
+
+#galleryModal .modal-body {
+  padding: var(--space-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#lightboxImg {
+  max-height: 80vh;
+  max-width: 100%;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+}
+
+#galleryModal .btn-close {
+  filter: invert(1);
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 10;
+}

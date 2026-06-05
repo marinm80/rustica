@@ -1,0 +1,71 @@
+/* === RESERVAS === */
+#reservas {
+  background-color: var(--rustica-cream);
+}
+
+.reservation-wrapper {
+  background-color: #fff;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: var(--space-2xl);
+  max-width: 880px;
+  margin: 0 auto;
+}
+
+.form-label {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: var(--font-size-sm);
+  color: var(--rustica-charcoal);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  margin-bottom: var(--space-xs);
+}
+
+.form-control,
+.form-select {
+  border: 2px solid var(--rustica-sand);
+  border-radius: var(--radius-md);
+  padding: 0.65rem 1rem;
+  font-family: var(--font-sans);
+  font-size: var(--font-size-base);
+  color: var(--rustica-charcoal);
+  background-color: var(--rustica-cream);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--rustica-siena);
+  box-shadow: 0 0 0 3px rgba(160, 82, 45, 0.15);
+  background-color: #fff;
+  outline: none;
+}
+
+.form-control.is-invalid,
+.form-select.is-invalid {
+  border-color: var(--rustica-error);
+}
+
+.form-control.is-valid,
+.form-select.is-valid {
+  border-color: var(--rustica-success);
+}
+
+.invalid-feedback {
+  font-size: var(--font-size-sm);
+  color: var(--rustica-error);
+}
+
+.reservation-cta-note {
+  font-size: var(--font-size-sm);
+  color: var(--rustica-muted);
+  margin-top: var(--space-md);
+  text-align: center;
+}
+
+/* Datepicker nativo */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: opacity(0.5);
+  cursor: pointer;
+}

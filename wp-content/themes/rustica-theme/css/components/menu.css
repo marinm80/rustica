@@ -1,0 +1,86 @@
+/* === MENÚ DESTACADOS === */
+#menu {
+  background-color: var(--rustica-beige);
+}
+
+.menu-card {
+  background-color: #fff;
+  border: 1px solid var(--rustica-sand);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+  height: 100%;
+}
+
+.menu-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.menu-card-img-wrapper {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  background-color: var(--rustica-sand);
+}
+
+.menu-card-img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-slow);
+}
+
+.menu-card:hover .menu-card-img-wrapper img {
+  transform: scale(1.05);
+}
+
+.menu-badge {
+  position: absolute;
+  top: var(--space-sm);
+  right: var(--space-sm);
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-pill);
+}
+
+.menu-badge--especialidad {
+  background-color: var(--rustica-siena);
+  color: #fff;
+}
+
+.menu-badge--recomendado {
+  background-color: var(--rustica-olive);
+  color: #fff;
+}
+
+.menu-card-body {
+  padding: var(--space-lg);
+}
+
+.menu-card-title {
+  font-family: var(--font-serif);
+  font-size: var(--font-size-xl);
+  color: var(--rustica-charcoal);
+  margin-bottom: var(--space-xs);
+}
+
+.menu-card-desc {
+  font-family: var(--font-sans);
+  font-size: var(--font-size-sm);
+  color: var(--rustica-muted);
+  margin-bottom: var(--space-md);
+  line-height: 1.5;
+}
+
+.menu-price {
+  font-family: var(--font-serif);
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--rustica-siena);
+}

@@ -1,0 +1,22 @@
+.section-padding {
+  padding-top: var(--space-section);
+  padding-bottom: var(--space-section);
+}
+
+.bg-cream { background-color: var(--rustica-cream); }
+.bg-beige { background-color: var(--rustica-beige); }
+.bg-dark  { background-color: var(--rustica-olive-dark); color: #fff; }
+
+/* Offset para navbar fija */
+section[id] {
+  scroll-margin-top: var(--navbar-height);
+}
+
+/* Divider decorativo */
+.section-divider {
+  width: 60px;
+  height: 3px;
+  background-color: var(--rustica-siena);
+  margin: var(--space-md) auto var(--space-xl);
+  border: none;
+}

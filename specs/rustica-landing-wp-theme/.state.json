@@ -1,0 +1,15 @@
+{
+  "slug": "rustica-landing-wp-theme",
+  "phase": "review",
+  "created_at": "2026-06-03",
+  "updated_at": "2026-06-04",
+  "idea": "Landing Page completa para restaurante Rústica (modern rustic). Bootstrap 5, TypeScript, FontAwesome. Secciones: Navbar scroll, Hero, Galería con lightbox, Menú destacados, Reservas con validación, Contacto+Footer. Diseñada para convertirse en tema WordPress reutilizable.",
+  "approvals": {
+    "spec": "2026-06-03",
+    "tech": "2026-06-04",
+    "data_model": "2026-06-04",
+    "plan": "2026-06-04",
+    "tasks": "2026-06-04",
+    "implementation": "2026-06-04"
+  }
+}

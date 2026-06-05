@@ -1,0 +1,67 @@
+/* === CONTACTO === */
+#contacto {
+  background-color: var(--rustica-beige);
+}
+
+.contact-info-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.contact-info-icon {
+  font-size: 1.25rem;
+  color: var(--rustica-siena);
+  min-width: 1.5rem;
+  margin-top: 0.15rem;
+}
+
+.contact-info-text strong {
+  display: block;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  color: var(--rustica-charcoal);
+  margin-bottom: 0.2rem;
+}
+
+.contact-info-text span {
+  font-family: var(--font-sans);
+  color: var(--rustica-muted);
+  font-size: var(--font-size-sm);
+}
+
+.map-placeholder {
+  width: 100%;
+  height: 220px;
+  border-radius: var(--radius-md);
+  border: 2px solid var(--rustica-sand);
+  background-color: var(--rustica-sand);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--rustica-muted);
+  font-size: var(--font-size-sm);
+  font-family: var(--font-sans);
+  overflow: hidden;
+}
+
+.map-placeholder iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.events-form-wrapper {
+  background-color: #fff;
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  box-shadow: var(--shadow-card);
+}
+
+.events-form-title {
+  font-family: var(--font-serif);
+  font-size: var(--font-size-2xl);
+  color: var(--rustica-charcoal);
+  margin-bottom: var(--space-lg);
+}

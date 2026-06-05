@@ -1,0 +1,108 @@
+/* === HERO === */
+#hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--rustica-charcoal);
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('../assets/img/hero/hero-restaurante.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transform: scale(1.05);
+  transition: transform 8s ease;
+}
+
+#hero:hover .hero-bg {
+  transform: scale(1);
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(46,42,38,0.55) 0%,
+    rgba(46,42,38,0.45) 60%,
+    rgba(46,42,38,0.70) 100%
+  );
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: var(--space-2xl) var(--space-lg);
+  max-width: 960px;
+}
+
+.hero-supertitle {
+  font-family: var(--font-serif);
+  font-size: var(--font-size-hero);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.1;
+  margin-bottom: var(--space-lg);
+  text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+
+.hero-supertitle em {
+  font-style: italic;
+  color: var(--rustica-terracotta);
+}
+
+.hero-subtitle {
+  font-family: var(--font-sans);
+  font-size: var(--font-size-xl);
+  color: rgba(255,255,255,0.90);
+  margin-bottom: var(--space-xl);
+  line-height: 1.6;
+  font-weight: 300;
+}
+
+.btn-rustica {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background-color: var(--rustica-siena);
+  color: #fff;
+  border: 2px solid var(--rustica-siena);
+  padding: 0.85rem 2.5rem;
+  border-radius: var(--radius-pill);
+  transition: background-color var(--transition-base), border-color var(--transition-base), transform var(--transition-fast);
+  display: inline-block;
+}
+
+.btn-rustica:hover,
+.btn-rustica:focus {
+  background-color: var(--rustica-siena-dark);
+  border-color: var(--rustica-siena-dark);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.hero-scroll-indicator {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  animation: bounce 2s infinite;
+  color: rgba(255,255,255,0.7);
+  font-size: 1.5rem;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(8px); }
+}
