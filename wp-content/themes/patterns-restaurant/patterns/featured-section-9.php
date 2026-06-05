@@ -19,7 +19,7 @@
 <!-- /wp:separator -->
 
 <!-- wp:heading {"textAlign":"left","level":6,"style":{"typography":{"fontStyle":"normal","fontWeight":"400","textTransform":"uppercase","letterSpacing":"1px"}}} -->
-<h6 class="wp-block-heading has-text-align-left" style="font-style:normal;font-weight:400;letter-spacing:1px;text-transform:uppercase"><?php esc_html_e( 'Latest News', 'patterns-restaurant' ); ?></h6>
+<h6 class="wp-block-heading has-text-align-left" style="font-style:normal;font-weight:400;letter-spacing:1px;text-transform:uppercase"><?php esc_html_e( 'Últimas Novedades', 'patterns-restaurant' ); ?></h6>
 <!-- /wp:heading -->
 
 <!-- wp:separator {"style":{"layout":{"selfStretch":"fixed","flexSize":"30px"}},"backgroundColor":"primary"} -->
@@ -28,7 +28,7 @@
 <!-- /wp:group -->
 
 <!-- wp:heading {"textAlign":"center"} -->
-<h2 class="wp-block-heading has-text-align-center"><?php esc_html_e( 'Use the tips and recipes of our chefs', 'patterns-restaurant' ); ?></h2>
+<h2 class="wp-block-heading has-text-align-center"><?php esc_html_e( 'Consejos, recetas de nuestros chefs e historias de nuestra cocina', 'patterns-restaurant' ); ?></h2>
 <!-- /wp:heading --></div>
 <!-- /wp:group -->
 

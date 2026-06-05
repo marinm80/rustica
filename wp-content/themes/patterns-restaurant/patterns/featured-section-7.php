@@ -19,7 +19,7 @@
 <!-- /wp:separator -->
 
 <!-- wp:heading {"textAlign":"left","level":6,"style":{"typography":{"fontStyle":"normal","fontWeight":"400","textTransform":"uppercase","letterSpacing":"1px"}}} -->
-<h6 class="wp-block-heading has-text-align-left" style="font-style:normal;font-weight:400;letter-spacing:1px;text-transform:uppercase"><?php esc_html_e( 'What they say', 'patterns-restaurant' ); ?></h6>
+<h6 class="wp-block-heading has-text-align-left" style="font-style:normal;font-weight:400;letter-spacing:1px;text-transform:uppercase"><?php esc_html_e( 'Opiniones', 'patterns-restaurant' ); ?></h6>
 <!-- /wp:heading -->
 
 <!-- wp:separator {"style":{"layout":{"selfStretch":"fixed","flexSize":"30px"}},"backgroundColor":"primary"} -->
@@ -28,7 +28,7 @@
 <!-- /wp:group -->
 
 <!-- wp:heading {"textAlign":"center"} -->
-<h2 class="wp-block-heading has-text-align-center"><?php esc_html_e( 'Guestbook', 'patterns-restaurant' ); ?></h2>
+<h2 class="wp-block-heading has-text-align-center"><?php esc_html_e( 'Libro de Visitas', 'patterns-restaurant' ); ?></h2>
 <!-- /wp:heading --></div>
 <!-- /wp:group -->
 
@@ -44,7 +44,7 @@
 <!-- /wp:spacer -->
 
 <!-- wp:paragraph {"align":"center","style":{"typography":{"fontStyle":"normal","fontWeight":"500","lineHeight":"1.3"}},"fontSize":"large"} -->
-<p class="has-text-align-center has-large-font-size" style="font-style:normal;font-weight:500;line-height:1.3"><?php esc_html_e( 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas voluptatem maiores eaque similique', 'patterns-restaurant' ); ?> </p>
+<p class="has-text-align-center has-large-font-size" style="font-style:normal;font-weight:500;line-height:1.3"><?php esc_html_e( '“El mejor lomo saltado y las arepas más deliciosas que he probado. La atención es impecable y el ambiente rústico con música en vivo te hace sentir en casa”.', 'patterns-restaurant' ); ?> </p>
 <!-- /wp:paragraph -->
 
 <!-- wp:spacer {"height":"var:preset|spacing|10"} -->
@@ -52,7 +52,7 @@
 <!-- /wp:spacer -->
 
 <!-- wp:paragraph {"align":"center"} -->
-<p class="has-text-align-center"><?php esc_html_e( 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas voluptatem maiores eaque', 'patterns-restaurant' ); ?></p>
+<p class="has-text-align-center"><?php esc_html_e( 'Una parada obligatoria en Madrid para los amantes de la gastronomía latina auténtica.', 'patterns-restaurant' ); ?></p>
 <!-- /wp:paragraph -->
 
 <!-- wp:spacer {"height":"var:preset|spacing|40"} -->
@@ -66,11 +66,11 @@
 
 <!-- wp:group {"align":"full","style":{"layout":{"selfStretch":"fit","flexSize":""},"spacing":{"blockGap":"0","padding":{"right":"0","left":"0"}}},"layout":{"type":"constrained","contentSize":""}} -->
 <div class="wp-block-group alignfull" style="padding-right:0;padding-left:0"><!-- wp:heading {"textAlign":"left","level":5,"align":"wide"} -->
-<h5 class="wp-block-heading alignwide has-text-align-left"><?php esc_html_e( 'Natalie Jones', 'patterns-restaurant' ); ?></h5>
+<h5 class="wp-block-heading alignwide has-text-align-left"><?php esc_html_e( 'Carlos Mendoza', 'patterns-restaurant' ); ?></h5>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph {"align":"left","textColor":"tertiary"} -->
-<p class="has-text-align-left has-tertiary-color has-text-color"><?php esc_html_e( 'Dental Assistant', 'patterns-restaurant' ); ?></p>
+<p class="has-text-align-left has-tertiary-color has-text-color"><?php esc_html_e( 'Sommelier & Crítico Gastronómico', 'patterns-restaurant' ); ?></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group --></div>
 <!-- /wp:group --></div>

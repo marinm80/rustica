@@ -23,12 +23,12 @@
 <!-- /wp:separator -->
 
 <!-- wp:heading {"textAlign":"left","level":6,"style":{"typography":{"fontStyle":"normal","fontWeight":"400","textTransform":"uppercase","letterSpacing":"1px"}}} -->
-<h6 class="wp-block-heading has-text-align-left" style="font-style:normal;font-weight:400;letter-spacing:1px;text-transform:uppercase"><?php esc_html_e( 'Mobile application', 'patterns-restaurant' ); ?></h6>
+<h6 class="wp-block-heading has-text-align-left" style="font-style:normal;font-weight:400;letter-spacing:1px;text-transform:uppercase"><?php esc_html_e( 'Nuestra App Móvil', 'patterns-restaurant' ); ?></h6>
 <!-- /wp:heading --></div>
 <!-- /wp:group -->
 
 <!-- wp:heading {"textAlign":"left"} -->
-<h2 class="wp-block-heading has-text-align-left"><?php esc_html_e( 'Download our application', 'patterns-restaurant' ); ?></h2>
+<h2 class="wp-block-heading has-text-align-left"><?php esc_html_e( 'Lleva el sabor en tu bolsillo', 'patterns-restaurant' ); ?></h2>
 <!-- /wp:heading --></div>
 <!-- /wp:group -->
 
@@ -37,7 +37,7 @@
 <!-- /wp:spacer -->
 
 <!-- wp:paragraph {"align":"left","textColor":"default","fontSize":"medium"} -->
-<p class="has-text-align-left has-default-color has-text-color has-medium-font-size"><?php esc_html_e( 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas voluptatem maiores eaque similique non distinctio voluptates perspiciatis', 'patterns-restaurant' ); ?></p>
+<p class="has-text-align-left has-default-color has-text-color has-medium-font-size"><?php esc_html_e( 'Pide tus platos favoritos a domicilio, reserva tu mesa de forma prioritaria y acumula puntos con nuestro programa de fidelidad directo desde tu móvil.', 'patterns-restaurant' ); ?></p>
 <!-- /wp:paragraph -->
 
 <!-- wp:spacer {"height":"var:preset|spacing|40"} -->
@@ -46,11 +46,11 @@
 
 <!-- wp:buttons {"style":{"spacing":{"blockGap":{"top":"var:preset|spacing|30","left":"var:preset|spacing|30"}}}} -->
 <div class="wp-block-buttons"><!-- wp:button {"style":{"typography":{"textTransform":"uppercase"}}} -->
-<div class="wp-block-button" style="text-transform:uppercase"><a class="wp-block-button__link wp-element-button"><?php esc_html_e( 'Apple Store', 'patterns-restaurant' ); ?></a></div>
+<div class="wp-block-button" style="text-transform:uppercase"><a class="wp-block-button__link wp-element-button"><?php esc_html_e( 'App Store', 'patterns-restaurant' ); ?></a></div>
 <!-- /wp:button -->
 
 <!-- wp:button {"style":{"typography":{"textTransform":"uppercase"}}} -->
-<div class="wp-block-button" style="text-transform:uppercase"><a class="wp-block-button__link wp-element-button"><?php esc_html_e( 'google Play store', 'patterns-restaurant' ); ?></a></div>
+<div class="wp-block-button" style="text-transform:uppercase"><a class="wp-block-button__link wp-element-button"><?php esc_html_e( 'Google Play', 'patterns-restaurant' ); ?></a></div>
 <!-- /wp:button --></div>
 <!-- /wp:buttons --></div>
 <!-- /wp:column -->

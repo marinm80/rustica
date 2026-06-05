@@ -26,27 +26,27 @@
 <!-- /wp:separator -->
 
 <!-- wp:heading {"textAlign":"left","level":6,"style":{"typography":{"fontStyle":"normal","fontWeight":"400","textTransform":"uppercase","letterSpacing":"1px"}},"textColor":"secondary"} -->
-<h6 class="wp-block-heading has-text-align-left has-secondary-color has-text-color" style="font-style:normal;font-weight:400;letter-spacing:1px;text-transform:uppercase"><?php esc_html_e( 'About Us', 'patterns-restaurant' ); ?></h6>
+<h6 class="wp-block-heading has-text-align-left has-secondary-color has-text-color" style="font-style:normal;font-weight:400;letter-spacing:1px;text-transform:uppercase"><?php esc_html_e( 'Nuestra Experiencia', 'patterns-restaurant' ); ?></h6>
 <!-- /wp:heading --></div>
 <!-- /wp:group -->
 
 <!-- wp:heading {"textAlign":"left"} -->
-<h2 class="wp-block-heading has-text-align-left"><?php esc_html_e( 'Our excellent service and top quality dishes are unmatched. Pick the best.', 'patterns-restaurant' ); ?></h2>
+<h2 class="wp-block-heading has-text-align-left"><?php esc_html_e( 'Un servicio excepcional y un ambiente cálido que te hará sentir como en casa.', 'patterns-restaurant' ); ?></h2>
 <!-- /wp:heading --></div>
 <!-- /wp:group -->
 
 
 <!-- wp:paragraph {"align":"left","fontSize":"medium"} -->
-<p class="has-text-align-left has-medium-font-size"><?php esc_html_e( '“Action ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate”.', 'patterns-restaurant' ); ?></p>
+<p class="has-text-align-left has-medium-font-size"><?php esc_html_e( '“Queremos que cada visita sea una celebración de la vida, de los buenos amigos y de los sabores de nuestra tierra”.', 'patterns-restaurant' ); ?></p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"align":"left","style":{"typography":{"lineHeight":"1.7"}},"fontSize":"small"} -->
-<p class="has-text-align-left has-small-font-size" style="line-height:1.7"><?php esc_html_e( 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas voluptatem maiores eaque similique non distinctio voluptates perspiciatis Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas voluptatem maiores eaque similique non distinctio voluptates perspiciatis', 'patterns-restaurant' ); ?></p>
+<p class="has-text-align-left has-small-font-size" style="line-height:1.7"><?php esc_html_e( 'En La Rústica Mesa nos esforzamos por brindar una hospitalidad inigualable. Nuestro equipo te guiará en un viaje sensorial que combina la coctelería de autor y platos llenos de color, pasión y el toque rústico característico de nuestra cocina.', 'patterns-restaurant' ); ?></p>
 <!-- /wp:paragraph -->
 
 <!-- wp:buttons -->
 <div class="wp-block-buttons"><!-- wp:button -->
-<div class="wp-block-button"><a class="wp-block-button__link wp-element-button"><?php esc_html_e( 'Explore More', 'patterns-restaurant' ); ?></a></div>
+<div class="wp-block-button"><a class="wp-block-button__link wp-element-button"><?php esc_html_e( 'Explorar Más', 'patterns-restaurant' ); ?></a></div>
 <!-- /wp:button --></div>
 <!-- /wp:buttons --></div>
 <!-- /wp:column -->

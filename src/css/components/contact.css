@@ -57,6 +57,19 @@
   border-radius: var(--radius-lg);
   padding: var(--space-xl);
   box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+.events-form-img {
+  width: calc(100% + (var(--space-xl) * 2));
+  height: 240px;
+  object-fit: cover;
+  margin-top: calc(-1 * var(--space-xl));
+  margin-left: calc(-1 * var(--space-xl));
+  margin-right: calc(-1 * var(--space-xl));
+  margin-bottom: var(--space-lg);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  display: block;
 }
 
 .events-form-title {

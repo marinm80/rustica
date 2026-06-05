@@ -26,27 +26,43 @@
 <!-- wp:group {"style":{"border":{"bottom":{"color":"var:preset|color|tertiary","style":"dashed","width":"1px"}},"spacing":{"padding":{"bottom":"var:preset|spacing|20"}}},"layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"space-between","verticalAlignment":"top"}} -->
 <div class="wp-block-group" style="border-bottom-color:var(--wp--preset--color--tertiary);border-bottom-style:dashed;border-bottom-width:1px;padding-bottom:var(--wp--preset--spacing--20)"><!-- wp:group {"style":{"spacing":{"blockGap":"0px"}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-group"><!-- wp:heading {"level":5} -->
-<h5 class="wp-block-heading"><?php esc_html_e( 'Marinated Grilled Shrimp', 'patterns-restaurant' ); ?></h5>
+<h5 class="wp-block-heading"><?php esc_html_e( 'Ceviche Clásico', 'patterns-restaurant' ); ?></h5>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p><?php esc_html_e( 'Fresh Shrimp, Oive Oil, Tomato Sauce', 'patterns-restaurant' ); ?></p>
+<p><?php esc_html_e( 'Pescado blanco marinado en leche de tigre con cebolla morada, camote y choclo', 'patterns-restaurant' ); ?></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 
 <!-- wp:paragraph {"style":{"typography":{"fontStyle":"normal","fontWeight":"600"}},"fontSize":"small"} -->
-<p class="has-small-font-size" style="font-style:normal;font-weight:600"><?php esc_html_e( '$3.00', 'patterns-restaurant' ); ?></p>
+<p class="has-small-font-size" style="font-style:normal;font-weight:600"><?php esc_html_e( '$15.00', 'patterns-restaurant' ); ?></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 
 <!-- wp:group {"style":{"border":{"bottom":{"color":"var:preset|color|tertiary","style":"dashed","width":"1px"}},"spacing":{"padding":{"bottom":"var:preset|spacing|20"}}},"layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"space-between","verticalAlignment":"top"}} -->
 <div class="wp-block-group" style="border-bottom-color:var(--wp--preset--color--tertiary);border-bottom-style:dashed;border-bottom-width:1px;padding-bottom:var(--wp--preset--spacing--20)"><!-- wp:group {"style":{"spacing":{"blockGap":"0px"}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-group"><!-- wp:heading {"level":5} -->
-<h5 class="wp-block-heading"><?php esc_html_e( 'Maitake Mushroom', 'patterns-restaurant' ); ?></h5>
+<h5 class="wp-block-heading"><?php esc_html_e( 'Arepa Reina Pepiada', 'patterns-restaurant' ); ?></h5>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p><?php esc_html_e( 'Whipped Miso, Yaki Sauce, Sesame', 'patterns-restaurant' ); ?></p>
+<p><?php esc_html_e( 'Arepa de maíz rellena de ensalada de pollo desmechado, aguacate cremoso y cilantro', 'patterns-restaurant' ); ?></p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group -->
+
+<!-- wp:paragraph {"style":{"typography":{"fontStyle":"normal","fontWeight":"600"}},"fontSize":"small"} -->
+<p class="has-small-font-size" style="font-style:normal;font-weight:600"><?php esc_html_e( '$9.00', 'patterns-restaurant' ); ?></p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group -->
+
+<!-- wp:group {"style":{"border":{"bottom":{"color":"var:preset|color|tertiary","style":"dashed","width":"1px"}},"spacing":{"padding":{"bottom":"var:preset|spacing|20"}}},"layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"space-between","verticalAlignment":"top"}} -->
+<div class="wp-block-group" style="border-bottom-color:var(--wp--preset--color--tertiary);border-bottom-style:dashed;border-bottom-width:1px;padding-bottom:var(--wp--preset--spacing--20)"><!-- wp:group {"style":{"spacing":{"blockGap":"0px"}},"layout":{"type":"constrained"}} -->
+<div class="wp-block-group"><!-- wp:heading {"level":5} -->
+<h5 class="wp-block-heading"><?php esc_html_e( 'Empanada de Pino', 'patterns-restaurant' ); ?></h5>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><?php esc_html_e( 'Empanada chilena horneada, rellena de carne de res picada, cebolla, aceituna y huevo duro', 'patterns-restaurant' ); ?></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 
@@ -58,48 +74,32 @@
 <!-- wp:group {"style":{"border":{"bottom":{"color":"var:preset|color|tertiary","style":"dashed","width":"1px"}},"spacing":{"padding":{"bottom":"var:preset|spacing|20"}}},"layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"space-between","verticalAlignment":"top"}} -->
 <div class="wp-block-group" style="border-bottom-color:var(--wp--preset--color--tertiary);border-bottom-style:dashed;border-bottom-width:1px;padding-bottom:var(--wp--preset--spacing--20)"><!-- wp:group {"style":{"spacing":{"blockGap":"0px"}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-group"><!-- wp:heading {"level":5} -->
-<h5 class="wp-block-heading"><?php esc_html_e( 'Jambon Iberico', 'patterns-restaurant' ); ?></h5>
+<h5 class="wp-block-heading"><?php esc_html_e( 'Tacos de Cochinita Pibil', 'patterns-restaurant' ); ?></h5>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p><?php esc_html_e( 'Smoked Tomato Aioli, Idizabal Cheese', 'patterns-restaurant' ); ?></p>
+<p><?php esc_html_e( 'Tres tortillas de maíz nixtamalizado con cerdo adobado en achiote y cebolla encurtida', 'patterns-restaurant' ); ?></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 
 <!-- wp:paragraph {"style":{"typography":{"fontStyle":"normal","fontWeight":"600"}},"fontSize":"small"} -->
-<p class="has-small-font-size" style="font-style:normal;font-weight:600"><?php esc_html_e( '$5.00', 'patterns-restaurant' ); ?></p>
-<!-- /wp:paragraph --></div>
-<!-- /wp:group -->
-
-<!-- wp:group {"style":{"border":{"bottom":{"color":"var:preset|color|tertiary","style":"dashed","width":"1px"}},"spacing":{"padding":{"bottom":"var:preset|spacing|20"}}},"layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"space-between","verticalAlignment":"top"}} -->
-<div class="wp-block-group" style="border-bottom-color:var(--wp--preset--color--tertiary);border-bottom-style:dashed;border-bottom-width:1px;padding-bottom:var(--wp--preset--spacing--20)"><!-- wp:group {"style":{"spacing":{"blockGap":"0px"}},"layout":{"type":"constrained"}} -->
-<div class="wp-block-group"><!-- wp:heading {"level":5} -->
-<h5 class="wp-block-heading"><?php esc_html_e( 'Salmon &amp; Prawn Nigiri', 'patterns-restaurant' ); ?></h5>
-<!-- /wp:heading -->
-
-<!-- wp:paragraph -->
-<p><?php esc_html_e( 'Served with soy sauce, wasabi &amp; pickled', 'patterns-restaurant' ); ?></p>
-<!-- /wp:paragraph --></div>
-<!-- /wp:group -->
-
-<!-- wp:paragraph {"style":{"typography":{"fontStyle":"normal","fontWeight":"600"}},"fontSize":"small"} -->
-<p class="has-small-font-size" style="font-style:normal;font-weight:600"><?php esc_html_e( '$8.00', 'patterns-restaurant' ); ?></p>
+<p class="has-small-font-size" style="font-style:normal;font-weight:600"><?php esc_html_e( '$11.00', 'patterns-restaurant' ); ?></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 
 <!-- wp:group {"style":{"spacing":{"padding":{"bottom":"var:preset|spacing|20"}}},"layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"space-between","verticalAlignment":"top"}} -->
 <div class="wp-block-group" style="padding-bottom:var(--wp--preset--spacing--20)"><!-- wp:group {"style":{"spacing":{"blockGap":"0px"}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-group"><!-- wp:heading {"level":5} -->
-<h5 class="wp-block-heading"><?php esc_html_e( 'Avocado &amp; Mango Salsa', 'patterns-restaurant' ); ?></h5>
+<h5 class="wp-block-heading"><?php esc_html_e( 'Tequeños Venezolanos', 'patterns-restaurant' ); ?></h5>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p><?php esc_html_e( 'Avocado, Mango, Tomatoes', 'patterns-restaurant' ); ?></p>
+<p><?php esc_html_e( 'Cinco deditos de masa crujiente rellenos de queso blanco fundido con alioli de ajo', 'patterns-restaurant' ); ?></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 
 <!-- wp:paragraph {"style":{"typography":{"fontStyle":"normal","fontWeight":"600"}},"fontSize":"small"} -->
-<p class="has-small-font-size" style="font-style:normal;font-weight:600"><?php esc_html_e( '$9.00', 'patterns-restaurant' ); ?></p>
+<p class="has-small-font-size" style="font-style:normal;font-weight:600"><?php esc_html_e( '$8.00', 'patterns-restaurant' ); ?></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group --></div>
 <!-- /wp:group --></div>
@@ -111,12 +111,12 @@
 <!-- /wp:image -->
 
 <!-- wp:paragraph {"align":"center"} -->
-<p class="has-text-align-center"><?php esc_html_e( 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas voluptatem maiores eaque similique non distinctio', 'patterns-restaurant' ); ?></p>
+<p class="has-text-align-center"><?php esc_html_e( 'Ven a disfrutar de una sinfonía de sabores auténticos que te transportarán a los rincones más cálidos de Latinoamérica.', 'patterns-restaurant' ); ?></p>
 <!-- /wp:paragraph -->
 
 <!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"}} -->
 <div class="wp-block-buttons"><!-- wp:button -->
-<div class="wp-block-button"><a class="wp-block-button__link wp-element-button"><?php esc_html_e( 'View All Menu', 'patterns-restaurant' ); ?></a></div>
+<div class="wp-block-button"><a class="wp-block-button__link wp-element-button"><?php esc_html_e( 'Ver Todo el Menú', 'patterns-restaurant' ); ?></a></div>
 <!-- /wp:button --></div>
 <!-- /wp:buttons -->
 
@@ -130,96 +130,96 @@
 <div class="wp-block-group"><!-- wp:group {"style":{"border":{"bottom":{"color":"var:preset|color|tertiary","style":"dashed","width":"1px"}},"spacing":{"padding":{"bottom":"var:preset|spacing|20"}}},"layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"space-between","verticalAlignment":"top"}} -->
 <div class="wp-block-group" style="border-bottom-color:var(--wp--preset--color--tertiary);border-bottom-style:dashed;border-bottom-width:1px;padding-bottom:var(--wp--preset--spacing--20)"><!-- wp:group {"style":{"spacing":{"blockGap":"0px"}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-group"><!-- wp:heading {"level":5} -->
-<h5 class="wp-block-heading"><?php esc_html_e( 'Tomato Bruschetta', 'patterns-restaurant' ); ?></h5>
+<h5 class="wp-block-heading"><?php esc_html_e( 'Lomo Saltado', 'patterns-restaurant' ); ?></h5>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p><?php esc_html_e( 'Tomatoes, Olive Oil, Cheese', 'patterns-restaurant' ); ?></p>
+<p><?php esc_html_e( 'Tiras de res salteadas al wok con cebolla, tomate, ají amarillo y salsa de soja', 'patterns-restaurant' ); ?></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 
 <!-- wp:paragraph {"style":{"typography":{"fontStyle":"normal","fontWeight":"600"}},"fontSize":"small"} -->
-<p class="has-small-font-size" style="font-style:normal;font-weight:600"><?php esc_html_e( '$5.00', 'patterns-restaurant' ); ?></p>
+<p class="has-small-font-size" style="font-style:normal;font-weight:600"><?php esc_html_e( '$22.00', 'patterns-restaurant' ); ?></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 
 <!-- wp:group {"style":{"border":{"bottom":{"color":"var:preset|color|tertiary","style":"dashed","width":"1px"}},"spacing":{"padding":{"bottom":"var:preset|spacing|20"}}},"layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"space-between","verticalAlignment":"top"}} -->
 <div class="wp-block-group" style="border-bottom-color:var(--wp--preset--color--tertiary);border-bottom-style:dashed;border-bottom-width:1px;padding-bottom:var(--wp--preset--spacing--20)"><!-- wp:group {"style":{"spacing":{"blockGap":"0px"}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-group"><!-- wp:heading {"level":5} -->
-<h5 class="wp-block-heading"><?php esc_html_e( 'Marinated Grilled Shrimp', 'patterns-restaurant' ); ?></h5>
+<h5 class="wp-block-heading"><?php esc_html_e( 'Bandeja Paisa Rústica', 'patterns-restaurant' ); ?></h5>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p><?php esc_html_e( 'Fresh Shrimp, Oive Oil, Tomato Sauce', 'patterns-restaurant' ); ?></p>
+<p><?php esc_html_e( 'Frijoles, arroz, chicharrón crujiente, carne molida, huevo frito, plátano maduro y arepa', 'patterns-restaurant' ); ?></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 
 <!-- wp:paragraph {"style":{"typography":{"fontStyle":"normal","fontWeight":"600"}},"fontSize":"small"} -->
-<p class="has-small-font-size" style="font-style:normal;font-weight:600"><?php esc_html_e( '$3.00', 'patterns-restaurant' ); ?></p>
+<p class="has-small-font-size" style="font-style:normal;font-weight:600"><?php esc_html_e( '$24.00', 'patterns-restaurant' ); ?></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 
 <!-- wp:group {"style":{"border":{"bottom":{"color":"var:preset|color|tertiary","style":"dashed","width":"1px"}},"spacing":{"padding":{"bottom":"var:preset|spacing|20"}}},"layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"space-between","verticalAlignment":"top"}} -->
 <div class="wp-block-group" style="border-bottom-color:var(--wp--preset--color--tertiary);border-bottom-style:dashed;border-bottom-width:1px;padding-bottom:var(--wp--preset--spacing--20)"><!-- wp:group {"style":{"spacing":{"blockGap":"0px"}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-group"><!-- wp:heading {"level":5} -->
-<h5 class="wp-block-heading"><?php esc_html_e( 'Maitake Mushroom', 'patterns-restaurant' ); ?></h5>
+<h5 class="wp-block-heading"><?php esc_html_e( 'Asado de Tira al Carbón', 'patterns-restaurant' ); ?></h5>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p><?php esc_html_e( 'Whipped Miso, Yaki Sauce, Sesame', 'patterns-restaurant' ); ?></p>
+<p><?php esc_html_e( 'Costilla de res asada lentamente a la leña, acompañada de chimichurri rústico', 'patterns-restaurant' ); ?></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 
 <!-- wp:paragraph {"style":{"typography":{"fontStyle":"normal","fontWeight":"600"}},"fontSize":"small"} -->
-<p class="has-small-font-size" style="font-style:normal;font-weight:600"><?php esc_html_e( '$7.00', 'patterns-restaurant' ); ?></p>
+<p class="has-small-font-size" style="font-style:normal;font-weight:600"><?php esc_html_e( '$26.00', 'patterns-restaurant' ); ?></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 
 <!-- wp:group {"style":{"border":{"bottom":{"color":"var:preset|color|tertiary","style":"dashed","width":"1px"}},"spacing":{"padding":{"bottom":"var:preset|spacing|20"}}},"layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"space-between","verticalAlignment":"top"}} -->
 <div class="wp-block-group" style="border-bottom-color:var(--wp--preset--color--tertiary);border-bottom-style:dashed;border-bottom-width:1px;padding-bottom:var(--wp--preset--spacing--20)"><!-- wp:group {"style":{"spacing":{"blockGap":"0px"}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-group"><!-- wp:heading {"level":5} -->
-<h5 class="wp-block-heading"><?php esc_html_e( 'Jambon Iberico', 'patterns-restaurant' ); ?></h5>
+<h5 class="wp-block-heading"><?php esc_html_e( 'Feijoada Brasileira', 'patterns-restaurant' ); ?></h5>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p><?php esc_html_e( 'Smoked Tomato Aioli, Idizabal Cheese', 'patterns-restaurant' ); ?></p>
+<p><?php esc_html_e( 'Guiso tradicional de frijoles negros con carnes ahumadas de cerdo y ternera', 'patterns-restaurant' ); ?></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 
 <!-- wp:paragraph {"style":{"typography":{"fontStyle":"normal","fontWeight":"600"}},"fontSize":"small"} -->
-<p class="has-small-font-size" style="font-style:normal;font-weight:600"><?php esc_html_e( '$5.00', 'patterns-restaurant' ); ?></p>
+<p class="has-small-font-size" style="font-style:normal;font-weight:600"><?php esc_html_e( '$21.00', 'patterns-restaurant' ); ?></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 
 <!-- wp:group {"style":{"border":{"bottom":{"color":"var:preset|color|tertiary","style":"dashed","width":"1px"}},"spacing":{"padding":{"bottom":"var:preset|spacing|20"}}},"layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"space-between","verticalAlignment":"top"}} -->
 <div class="wp-block-group" style="border-bottom-color:var(--wp--preset--color--tertiary);border-bottom-style:dashed;border-bottom-width:1px;padding-bottom:var(--wp--preset--spacing--20)"><!-- wp:group {"style":{"spacing":{"blockGap":"0px"}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-group"><!-- wp:heading {"level":5} -->
-<h5 class="wp-block-heading"><?php esc_html_e( 'Salmon &amp; Prawn Nigiri', 'patterns-restaurant' ); ?></h5>
+<h5 class="wp-block-heading"><?php esc_html_e( 'Pescado a la Veracruzana', 'patterns-restaurant' ); ?></h5>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p><?php esc_html_e( 'Served with soy sauce, wasabi &amp; pickled', 'patterns-restaurant' ); ?></p>
+<p><?php esc_html_e( 'Filete de pescado fresco cocido con salsa de tomate, alcaparras, aceitunas y chiles', 'patterns-restaurant' ); ?></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 
 <!-- wp:paragraph {"style":{"typography":{"fontStyle":"normal","fontWeight":"600"}},"fontSize":"small"} -->
-<p class="has-small-font-size" style="font-style:normal;font-weight:600"><?php esc_html_e( '$8.00', 'patterns-restaurant' ); ?></p>
+<p class="has-small-font-size" style="font-style:normal;font-weight:600"><?php esc_html_e( '$23.00', 'patterns-restaurant' ); ?></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 
 <!-- wp:group {"style":{"spacing":{"padding":{"bottom":"var:preset|spacing|20"}}},"layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"space-between","verticalAlignment":"top"}} -->
 <div class="wp-block-group" style="padding-bottom:var(--wp--preset--spacing--20)"><!-- wp:group {"style":{"spacing":{"blockGap":"0px"}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-group"><!-- wp:heading {"level":5} -->
-<h5 class="wp-block-heading"><?php esc_html_e( 'Avocado &amp; Mango Salsa', 'patterns-restaurant' ); ?></h5>
+<h5 class="wp-block-heading"><?php esc_html_e( 'Churrasco con Chimichurri', 'patterns-restaurant' ); ?></h5>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p><?php esc_html_e( 'Avocado, Mango, Tomatoes', 'patterns-restaurant' ); ?></p>
+<p><?php esc_html_e( 'Corte de carne tierna a la parrilla servido con yuca frita y ensalada criolla', 'patterns-restaurant' ); ?></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 
 <!-- wp:paragraph {"style":{"typography":{"fontStyle":"normal","fontWeight":"600"}},"fontSize":"small"} -->
-<p class="has-small-font-size" style="font-style:normal;font-weight:600"><?php esc_html_e( '$9.00', 'patterns-restaurant' ); ?></p>
+<p class="has-small-font-size" style="font-style:normal;font-weight:600"><?php esc_html_e( '$25.00', 'patterns-restaurant' ); ?></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group --></div>
 <!-- /wp:group --></div>

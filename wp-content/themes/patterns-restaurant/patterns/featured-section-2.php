@@ -27,12 +27,12 @@
 		<!-- /wp:separator -->
 
 		<!-- wp:heading {"textAlign":"left","level":6,"style":{"typography":{"fontStyle":"normal","fontWeight":"400","textTransform":"uppercase","letterSpacing":"1px"}}} -->
-		<h6 class="wp-block-heading has-text-align-left" style="font-style:normal;font-weight:400;letter-spacing:1px;text-transform:uppercase"><?php esc_html_e( 'Chefs secrets', 'patterns-restaurant' ); ?></h6>
+		<h6 class="wp-block-heading has-text-align-left" style="font-style:normal;font-weight:400;letter-spacing:1px;text-transform:uppercase"><?php esc_html_e( 'Secretos de la Cocina', 'patterns-restaurant' ); ?></h6>
 		<!-- /wp:heading --></div>
 		<!-- /wp:group -->
 
 		<!-- wp:heading {"textAlign":"left"} -->
-		<h2 class="wp-block-heading has-text-align-left"><?php esc_html_e( 'Truly exotic and appetizing cuisine for those special moments in life', 'patterns-restaurant' ); ?></h2>
+		<h2 class="wp-block-heading has-text-align-left"><?php esc_html_e( 'Una propuesta culinaria vibrante que despierta los sentidos y celebra la vida', 'patterns-restaurant' ); ?></h2>
 		<!-- /wp:heading --></div>
 		<!-- /wp:group -->
 
@@ -40,20 +40,20 @@
 		<!-- wp:columns -->
 		<div class="wp-block-columns"><!-- wp:column {"width":"50%"} -->
 		<div class="wp-block-column" style="flex-basis:50%"><!-- wp:paragraph {"align":"left","textColor":"tertiary"} -->
-		<p class="has-text-align-left has-tertiary-color has-text-color"><?php esc_html_e( 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas voluptatem maiores eaque similique non distinctio Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas voluptatem maiores eaque similique non distinctio', 'patterns-restaurant' ); ?></p>
+		<p class="has-text-align-left has-tertiary-color has-text-color"><?php esc_html_e( 'Seleccionamos minuciosamente especias nativas, hierbas aromáticas y ajíes tradicionales para recrear la profundidad aromática de los platos que definen a nuestro continente.', 'patterns-restaurant' ); ?></p>
 		<!-- /wp:paragraph --></div>
 		<!-- /wp:column -->
 
 		<!-- wp:column {"width":"50%"} -->
 		<div class="wp-block-column" style="flex-basis:50%"><!-- wp:paragraph {"align":"left","textColor":"tertiary"} -->
-		<p class="has-text-align-left has-tertiary-color has-text-color"><?php esc_html_e( 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas voluptatem maiores eaque similique non distinctio Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas voluptatem maiores eaque similique non distinctio', 'patterns-restaurant' ); ?></p>
+		<p class="has-text-align-left has-tertiary-color has-text-color"><?php esc_html_e( 'El fuego, la brasa y la paciencia son los pilares de nuestra cocina rústica, logrando texturas perfectas y sabores intensos que evocan el calor del hogar.', 'patterns-restaurant' ); ?></p>
 		<!-- /wp:paragraph --></div>
 		<!-- /wp:column --></div>
 		<!-- /wp:columns -->
 
 		<!-- wp:buttons {"layout":{"type":"flex","justifyContent":"left"}} -->
 		<div class="wp-block-buttons"><!-- wp:button {"className":"is-style-fill"} -->
-		<div class="wp-block-button is-style-fill"><a class="wp-block-button__link wp-element-button"><?php esc_html_e( 'Find Out More', 'patterns-restaurant' ); ?></a></div>
+		<div class="wp-block-button is-style-fill"><a class="wp-block-button__link wp-element-button"><?php esc_html_e( 'Descubrir Más', 'patterns-restaurant' ); ?></a></div>
 		<!-- /wp:button --></div>
 		<!-- /wp:buttons -->
 

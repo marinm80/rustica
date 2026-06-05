@@ -7,8 +7,8 @@
 
 // ── Datos del Hero ────────────────────────────────────────────────────────────
 $hero_image    = rustica_field_url( 'hero_bg' );
-$hero_title    = rustica_field( 'hero_title',    'Sabores que saben a casa' );
-$hero_subtitle = rustica_field( 'hero_subtitle', 'Producto de temporada, fuego lento y la calidez del campo en cada plato. Reserva tu mesa y déjate llevar.' );
+$hero_title    = rustica_field( 'hero_title',    'Sabores de nuestra tierra' );
+$hero_subtitle = rustica_field( 'hero_subtitle', 'La tradición y la calidez de la cocina latinoamericana al fuego de la leña. Reserva tu mesa y déjate llevar.' );
 $hero_cta      = rustica_field( 'hero_cta',      'Reserva una Mesa' );
 
 $hero_bg_style = $hero_image
@@ -17,10 +17,10 @@ $hero_bg_style = $hero_image
 
 // ── Datos de los 4 platos ─────────────────────────────────────────────────────
 $platos_defaults = array(
-	1 => array( 'name' => 'Cordero al horno de leña',      'desc' => 'Paletilla cocida a fuego lento con romero, miel y patatas confitadas.',        'price' => '24,50 €', 'badge' => 'Especialidad', 'img' => 'cordero.jpg' ),
-	2 => array( 'name' => 'Risotto de setas de temporada', 'desc' => 'Arroz cremoso con boletus, parmesano curado y aceite de trufa.',                'price' => '18,00 €', 'badge' => 'Recomendado',  'img' => 'risotto.jpg' ),
-	3 => array( 'name' => 'Huerto a la brasa',             'desc' => 'Verduras de nuestro huerto asadas con vinagreta de hierbas y queso de cabra.', 'price' => '15,50 €', 'badge' => 'Recomendado',  'img' => 'huerto.jpg' ),
-	4 => array( 'name' => 'Tarta rústica de manzana',      'desc' => 'Masa quebrada artesanal, manzana caramelizada y helado de vainilla.',           'price' => '8,50 €',  'badge' => '',            'img' => 'tarta-manzana.jpg' ),
+	1 => array( 'name' => 'Lomo Saltado',      'desc' => 'Tiras de res al wok con cebolla, tomate, ají amarillo, servido con papas fritas y arroz.',        'price' => '22,00 €', 'badge' => 'Especialidad', 'img' => 'cordero.jpg' ),
+	2 => array( 'name' => 'Ceviche Clásico', 'desc' => 'Pescado blanco marinado en leche de tigre con cebolla morada, camote y choclo.',                'price' => '15,00 €', 'badge' => 'Recomendado',  'img' => 'risotto.jpg' ),
+	3 => array( 'name' => 'Arepa Reina Pepiada',             'desc' => 'Arepa de maíz rellena de ensalada de pollo desmechado y aguacate cremoso.', 'price' => '9,00 €', 'badge' => 'Recomendado',  'img' => 'huerto.jpg' ),
+	4 => array( 'name' => 'Tres Leches Tres Sabores',      'desc' => 'Bizcocho tradicional bañado en tres leches con un toque de canela y merengue.',           'price' => '8,50 €',  'badge' => '',            'img' => 'tarta-manzana.jpg' ),
 );
 
 $platos = array();
@@ -39,10 +39,10 @@ foreach ( $platos_defaults as $n => $d ) {
 
 // ── Datos de contacto ─────────────────────────────────────────────────────────
 $contact = array(
-	'address' => rustica_field( 'contact_address', 'Camino del Molino 12, 28010 Madrid, España' ),
-	'phone'   => rustica_field( 'contact_phone',   '+34 910 123 456' ),
-	'email'   => rustica_field( 'contact_email',   'hola@rustica.example' ),
-	'hours'   => rustica_field( 'contact_hours',   'Mar–Dom: 13:00–16:00 y 20:00–23:30 · Lunes cerrado' ),
+	'address' => rustica_field( 'contact_address', 'Calle de la Tradición 123, 28010 Madrid, España' ),
+	'phone'   => rustica_field( 'contact_phone',   '+34 912 345 678' ),
+	'email'   => rustica_field( 'contact_email',   'contacto@larusticamesa.com' ),
+	'hours'   => rustica_field( 'contact_hours',   'Mar–Dom: 13:00–23:30 · Lunes cerrado' ),
 	'map'     => rustica_field_url( 'contact_map', 'https://maps.google.com/maps?q=Madrid,Spain&output=embed' ),
 );
 
@@ -57,16 +57,16 @@ $social = array(
 $gallery_base = get_stylesheet_directory_uri() . '/assets/img/gallery/';
 $gallery = array(
 	'restaurante' => array(
-		array( 'src' => $gallery_base . 'salon-01.jpg',    'alt' => 'Salón principal de Rústica' ),
-		array( 'src' => $gallery_base . 'terraza-02.jpg',  'alt' => 'Terraza exterior' ),
-		array( 'src' => $gallery_base . 'barra-03.jpg',    'alt' => 'Barra y bodega' ),
-		array( 'src' => $gallery_base . 'chimenea-04.jpg', 'alt' => 'Rincón de la chimenea' ),
+		array( 'src' => $gallery_base . 'salon-01.jpg',    'alt' => 'Salón principal de La Rústica Mesa' ),
+		array( 'src' => $gallery_base . 'terraza-02.jpg',  'alt' => 'Terraza exterior de La Rústica Mesa' ),
+		array( 'src' => $gallery_base . 'barra-03.jpg',    'alt' => 'Barra y coctelería' ),
+		array( 'src' => $gallery_base . 'chimenea-04.jpg', 'alt' => 'Rincón acogedor' ),
 	),
 	'platos' => array(
-		array( 'src' => $gallery_base . 'plato-01.jpg', 'alt' => 'Cordero al horno de leña' ),
-		array( 'src' => $gallery_base . 'plato-02.jpg', 'alt' => 'Risotto de setas' ),
-		array( 'src' => $gallery_base . 'plato-03.jpg', 'alt' => 'Verduras a la brasa' ),
-		array( 'src' => $gallery_base . 'plato-04.jpg', 'alt' => 'Tarta rústica de manzana' ),
+		array( 'src' => $gallery_base . 'plato-01.jpg', 'alt' => 'Lomo Saltado' ),
+		array( 'src' => $gallery_base . 'plato-02.jpg', 'alt' => 'Ceviche Clásico' ),
+		array( 'src' => $gallery_base . 'plato-03.jpg', 'alt' => 'Arepa Reina Pepiada' ),
+		array( 'src' => $gallery_base . 'plato-04.jpg', 'alt' => 'Tres Leches Tres Sabores' ),
 	),
 );
 ?><!DOCTYPE html>
@@ -221,57 +221,66 @@ $gallery = array(
         <p class="section-subtitle">Cuéntanos cuándo vienes y te esperamos</p>
       </div>
       <div class="reservation-wrapper">
-        <form id="reservationForm" novalidate aria-label="Formulario de reserva">
-          <?php wp_nonce_field( 'rustica_reservation', 'rustica_nonce' ); ?>
-          <div class="row g-3">
-            <div class="col-12 col-md-6">
-              <label for="res-name" class="form-label">Nombre completo</label>
-              <input type="text" class="form-control" id="res-name" name="name" placeholder="Tu nombre" required autocomplete="name">
-              <div class="invalid-feedback">El nombre es obligatorio.</div>
-            </div>
-            <div class="col-12 col-md-6">
-              <label for="res-email" class="form-label">Correo electrónico</label>
-              <input type="email" class="form-control" id="res-email" name="email" placeholder="tu@correo.com" required autocomplete="email">
-              <div class="invalid-feedback">Introduce un correo válido.</div>
-            </div>
-            <div class="col-12 col-md-6">
-              <label for="res-phone" class="form-label">Teléfono</label>
-              <input type="tel" class="form-control" id="res-phone" name="phone" placeholder="+34 612 345 678" required autocomplete="tel">
-              <div class="invalid-feedback">El teléfono es obligatorio (mín. 7 dígitos).</div>
-            </div>
-            <div class="col-12 col-md-6">
-              <label for="res-party" class="form-label">Número de personas</label>
-              <input type="number" class="form-control" id="res-party" name="partySize" min="1" max="30" value="2" required>
-              <div class="invalid-feedback">Entre 1 y 30 personas.</div>
-            </div>
-            <div class="col-12 col-md-6">
-              <label for="res-date" class="form-label">Fecha</label>
-              <input type="date" class="form-control" id="res-date" name="date" required>
-              <div class="invalid-feedback">Selecciona una fecha válida (hoy o posterior).</div>
-            </div>
-            <div class="col-12 col-md-6">
-              <label for="res-time" class="form-label">Hora</label>
-              <select class="form-select" id="res-time" name="time" required>
-                <option value="" disabled selected>Selecciona hora</option>
-                <?php for ( $h = 12; $h < 24; $h++ ) {
-                  foreach ( array( '00', '30' ) as $m ) {
-                    $val = sprintf( '%02d:%s', $h, $m );
-                    echo '<option value="' . esc_attr( $val ) . '">' . esc_html( $val ) . "</option>\n";
-                  }
-                } ?>
-              </select>
-              <div class="invalid-feedback">Selecciona una hora.</div>
-            </div>
-            <div class="col-12">
-              <div id="reservationAlert"></div>
-              <button type="submit" class="btn-rustica w-100"><?php echo esc_html( $hero_cta ); ?></button>
-              <p class="reservation-cta-note">
-                <i class="fa-solid fa-users fa-sm me-1"></i>
-                Para grupos de más de 30 personas, <a href="#contacto">contáctanos por eventos</a>.
-              </p>
+        <div class="row g-0">
+          <div class="col-lg-5 d-none d-lg-block">
+            <div class="reservation-image-side" style="background-image: url('<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/img/gallery/mesa-reservada.jpg' ); ?>');"></div>
+          </div>
+          <div class="col-lg-7">
+            <div class="reservation-form-container">
+              <form id="reservationForm" novalidate aria-label="Formulario de reserva">
+                <?php wp_nonce_field( 'rustica_reservation', 'rustica_nonce' ); ?>
+                <div class="row g-3">
+                  <div class="col-12 col-md-6">
+                    <label for="res-name" class="form-label">Nombre completo</label>
+                    <input type="text" class="form-control" id="res-name" name="name" placeholder="Tu nombre" required autocomplete="name">
+                    <div class="invalid-feedback">El nombre es obligatorio.</div>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label for="res-email" class="form-label">Correo electrónico</label>
+                    <input type="email" class="form-control" id="res-email" name="email" placeholder="tu@correo.com" required autocomplete="email">
+                    <div class="invalid-feedback">Introduce un correo válido.</div>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label for="res-phone" class="form-label">Teléfono</label>
+                    <input type="tel" class="form-control" id="res-phone" name="phone" placeholder="+34 612 345 678" required autocomplete="tel">
+                    <div class="invalid-feedback">El teléfono es obligatorio (mín. 7 dígitos).</div>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label for="res-party" class="form-label">Número de personas</label>
+                    <input type="number" class="form-control" id="res-party" name="partySize" min="1" max="30" value="2" required>
+                    <div class="invalid-feedback">Entre 1 y 30 personas.</div>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label for="res-date" class="form-label">Fecha</label>
+                    <input type="date" class="form-control" id="res-date" name="date" required>
+                    <div class="invalid-feedback">Selecciona una fecha válida (hoy o posterior).</div>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label for="res-time" class="form-label">Hora</label>
+                    <select class="form-select" id="res-time" name="time" required>
+                      <option value="" disabled selected>Selecciona hora</option>
+                      <?php for ( $h = 12; $h < 24; $h++ ) {
+                        foreach ( array( '00', '30' ) as $m ) {
+                          $val = sprintf( '%02d:%s', $h, $m );
+                          echo '<option value="' . esc_attr( $val ) . '">' . esc_html( $val ) . "</option>\n";
+                        }
+                      } ?>
+                    </select>
+                    <div class="invalid-feedback">Selecciona una hora.</div>
+                  </div>
+                  <div class="col-12">
+                    <div id="reservationAlert"></div>
+                    <button type="submit" class="btn-rustica w-100"><?php echo esc_html( $hero_cta ); ?></button>
+                    <p class="reservation-cta-note">
+                      <i class="fa-solid fa-users fa-sm me-1"></i>
+                      Para grupos de más de 30 personas, <a href="#contacto">contáctanos por eventos</a>.
+                    </p>
+                  </div>
+                </div>
+              </form>
             </div>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   </section>
@@ -325,6 +334,7 @@ $gallery = array(
 
         <div class="col-12 col-lg-7">
           <div class="events-form-wrapper">
+            <img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/img/gallery/catering-event.jpg' ); ?>" alt="Servicio de catering y eventos de cocina latina" class="events-form-img">
             <h3 class="events-form-title">Catering y Eventos Privados</h3>
             <form id="eventsForm" novalidate aria-label="Formulario de eventos y catering">
               <?php wp_nonce_field( 'rustica_events', 'rustica_events_nonce' ); ?>

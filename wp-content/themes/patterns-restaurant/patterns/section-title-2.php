@@ -18,7 +18,7 @@
 <!-- /wp:separator -->
 
 <!-- wp:heading {"textAlign":"left","level":6,"style":{"typography":{"fontStyle":"normal","fontWeight":"400","textTransform":"uppercase","letterSpacing":"1px"}},"textColor":"secondary"} -->
-<h6 class="wp-block-heading has-text-align-left has-secondary-color has-text-color" style="font-style:normal;font-weight:400;letter-spacing:1px;text-transform:uppercase"><?php esc_html_e( 'Special Menu', 'patterns-restaurant' ); ?></h6>
+<h6 class="wp-block-heading has-text-align-left has-secondary-color has-text-color" style="font-style:normal;font-weight:400;letter-spacing:1px;text-transform:uppercase"><?php esc_html_e( 'Menú Especial', 'patterns-restaurant' ); ?></h6>
 <!-- /wp:heading -->
 
 <!-- wp:separator {"style":{"layout":{"selfStretch":"fixed","flexSize":"30px"}},"backgroundColor":"primary"} -->
@@ -27,6 +27,6 @@
 <!-- /wp:group -->
 
 <!-- wp:heading {"textAlign":"center"} -->
-<h2 class="wp-block-heading has-text-align-center"><?php esc_html_e( 'Various quality specialties made with a personal touch', 'patterns-restaurant' ); ?></h2>
+<h2 class="wp-block-heading has-text-align-center"><?php esc_html_e( 'Nuestras Especialidades Destacadas', 'patterns-restaurant' ); ?></h2>
 <!-- /wp:heading --></div>
 <!-- /wp:group -->

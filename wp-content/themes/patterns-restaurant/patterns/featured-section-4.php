@@ -22,7 +22,7 @@
 <!-- /wp:separator -->
 
 <!-- wp:heading {"textAlign":"left","level":6,"style":{"typography":{"fontStyle":"normal","fontWeight":"400","textTransform":"uppercase","letterSpacing":"1px"}}} -->
-<h6 class="wp-block-heading has-text-align-left" style="font-style:normal;font-weight:400;letter-spacing:1px;text-transform:uppercase"><?php esc_html_e( 'Today\'s Speciality', 'patterns-restaurant' ); ?></h6>
+<h6 class="wp-block-heading has-text-align-left" style="font-style:normal;font-weight:400;letter-spacing:1px;text-transform:uppercase"><?php esc_html_e( 'Especialidad del Día', 'patterns-restaurant' ); ?></h6>
 <!-- /wp:heading -->
 
 <!-- wp:separator {"style":{"layout":{"selfStretch":"fixed","flexSize":"30px"}},"backgroundColor":"primary"} -->
@@ -31,7 +31,7 @@
 <!-- /wp:group -->
 
 <!-- wp:heading {"textAlign":"center"} -->
-<h2 class="wp-block-heading has-text-align-center"><?php esc_html_e( 'La creme de la creme', 'patterns-restaurant' ); ?></h2>
+<h2 class="wp-block-heading has-text-align-center"><?php esc_html_e( 'Lo mejor de nuestra parrilla', 'patterns-restaurant' ); ?></h2>
 <!-- /wp:heading --></div>
 <!-- /wp:group -->
 
@@ -40,7 +40,7 @@
 <!-- /wp:spacer -->
 
 <!-- wp:heading {"textAlign":"center","level":5,"style":{"typography":{"fontStyle":"normal","fontWeight":"400"}},"textColor":"default"} -->
-<h5 class="wp-block-heading has-text-align-center has-default-color has-text-color" style="font-style:normal;font-weight:400"><?php esc_html_e( 'Oven Roasted duck with special sousage', 'patterns-restaurant' ); ?></h5>
+<h5 class="wp-block-heading has-text-align-center has-default-color has-text-color" style="font-style:normal;font-weight:400"><?php esc_html_e( 'Costillar de Cerdo al Horno de Leña con Glaseado de Maracuyá', 'patterns-restaurant' ); ?></h5>
 <!-- /wp:heading -->
 
 <!-- wp:spacer {"height":"var:preset|spacing|20"} -->
@@ -48,7 +48,7 @@
 <!-- /wp:spacer -->
 
 <!-- wp:heading {"textAlign":"center","level":3} -->
-<h3 class="wp-block-heading has-text-align-center"><?php esc_html_e( '$25.00', 'patterns-restaurant' ); ?></h3>
+<h3 class="wp-block-heading has-text-align-center"><?php esc_html_e( '$28.00', 'patterns-restaurant' ); ?></h3>
 <!-- /wp:heading -->
 
 <!-- wp:spacer {"height":"var:preset|spacing|20"} -->
@@ -57,7 +57,7 @@
 
 <!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"}} -->
 <div class="wp-block-buttons"><!-- wp:button -->
-<div class="wp-block-button"><a class="wp-block-button__link wp-element-button"><?php esc_html_e( 'View All Menu', 'patterns-restaurant' ); ?></a></div>
+<div class="wp-block-button"><a class="wp-block-button__link wp-element-button"><?php esc_html_e( 'Ver Todo el Menú', 'patterns-restaurant' ); ?></a></div>
 <!-- /wp:button --></div>
 <!-- /wp:buttons --></div>
 <!-- /wp:group --></div></div>

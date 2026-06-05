@@ -23,7 +23,7 @@ function rustica_enqueue_assets() {
 
 	wp_enqueue_style( 'rustica-main',
 		get_stylesheet_directory_uri() . '/css/main.css',
-		array( 'bootstrap', 'fontawesome', 'rustica-fonts' ), '1.0.0' );
+		array( 'bootstrap', 'fontawesome', 'rustica-fonts' ), '1.1.0' );
 
 	wp_enqueue_script( 'bootstrap-js',
 		'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js',
@@ -86,11 +86,11 @@ function rustica_customize_register( WP_Customize_Manager $wp_customize ) {
 	rustica_add_setting( $wp_customize, 'hero_image', '',
 		'Imagen de fondo', 'rustica_hero', 'image' );
 
-	rustica_add_setting( $wp_customize, 'hero_title', 'Sabores que saben a casa',
+	rustica_add_setting( $wp_customize, 'hero_title', 'Sabores de nuestra tierra',
 		'Título principal', 'rustica_hero', 'text' );
 
 	rustica_add_setting( $wp_customize, 'hero_subtitle',
-		'Producto de temporada, fuego lento y la calidez del campo en cada plato. Reserva tu mesa y déjate llevar.',
+		'La tradición y la calidez de la cocina latinoamericana al fuego de la leña. Reserva tu mesa y déjate llevar.',
 		'Subtítulo', 'rustica_hero', 'textarea' );
 
 	rustica_add_setting( $wp_customize, 'hero_cta', 'Reserva una Mesa',
@@ -103,10 +103,10 @@ function rustica_customize_register( WP_Customize_Manager $wp_customize ) {
 	) );
 
 	$platos_defaults = array(
-		1 => array( 'name' => 'Cordero al horno de leña',       'desc' => 'Paletilla cocida a fuego lento con romero, miel y patatas confitadas.',          'price' => '24,50 €', 'badge' => 'Especialidad' ),
-		2 => array( 'name' => 'Risotto de setas de temporada',   'desc' => 'Arroz cremoso con boletus, parmesano curado y aceite de trufa.',                  'price' => '18,00 €', 'badge' => 'Recomendado' ),
-		3 => array( 'name' => 'Huerto a la brasa',               'desc' => 'Verduras de nuestro huerto asadas con vinagreta de hierbas y queso de cabra.',    'price' => '15,50 €', 'badge' => 'Recomendado' ),
-		4 => array( 'name' => 'Tarta rústica de manzana',        'desc' => 'Masa quebrada artesanal, manzana caramelizada y helado de vainilla.',             'price' => '8,50 €',  'badge' => '' ),
+		1 => array( 'name' => 'Lomo Saltado',      'desc' => 'Tiras de res al wok con cebolla, tomate, ají amarillo, servido con papas fritas y arroz.',        'price' => '22,00 €', 'badge' => 'Especialidad' ),
+		2 => array( 'name' => 'Ceviche Clásico', 'desc' => 'Pescado blanco marinado en leche de tigre con cebolla morada, camote y choclo.',                'price' => '15,00 €', 'badge' => 'Recomendado' ),
+		3 => array( 'name' => 'Arepa Reina Pepiada',             'desc' => 'Arepa de maíz rellena de ensalada de pollo desmechado y aguacate cremoso.', 'price' => '9,00 €', 'badge' => 'Recomendado' ),
+		4 => array( 'name' => 'Tres Leches Tres Sabores',      'desc' => 'Bizcocho tradicional bañado en tres leches con un toque de canela y merengue.',           'price' => '8,50 €',  'badge' => '' ),
 	);
 
 	foreach ( $platos_defaults as $n => $p ) {
@@ -124,16 +124,16 @@ function rustica_customize_register( WP_Customize_Manager $wp_customize ) {
 		'panel' => 'rustica_panel',
 	) );
 
-	rustica_add_setting( $wp_customize, 'contact_address', 'Camino del Molino 12, 28010 Madrid, España',
+	rustica_add_setting( $wp_customize, 'contact_address', 'Calle de la Tradición 123, 28010 Madrid, España',
 		'Dirección', 'rustica_contact', 'text' );
 
-	rustica_add_setting( $wp_customize, 'contact_phone', '+34 910 123 456',
+	rustica_add_setting( $wp_customize, 'contact_phone', '+34 912 345 678',
 		'Teléfono', 'rustica_contact', 'text' );
 
-	rustica_add_setting( $wp_customize, 'contact_email', 'hola@rustica.example',
+	rustica_add_setting( $wp_customize, 'contact_email', 'contacto@larusticamesa.com',
 		'Email', 'rustica_contact', 'text' );
 
-	rustica_add_setting( $wp_customize, 'contact_hours', 'Mar–Dom: 13:00–16:00 y 20:00–23:30 · Lunes cerrado',
+	rustica_add_setting( $wp_customize, 'contact_hours', 'Mar–Dom: 13:00–23:30 · Lunes cerrado',
 		'Horarios', 'rustica_contact', 'textarea' );
 
 	// ── SECCIÓN: Redes Sociales ──────────────
@@ -191,8 +191,8 @@ function rustica_register_acf_fields() {
 		'menu_order' => 0,
 		'fields' => array(
 			array( 'key' => 'field_hero_bg',       'label' => 'Imagen de fondo',  'name' => 'hero_bg',       'type' => 'image',    'return_format' => 'url', 'preview_size' => 'medium' ),
-			array( 'key' => 'field_hero_title',    'label' => 'Título',           'name' => 'hero_title',    'type' => 'text',     'default_value' => 'Sabores que saben a casa' ),
-			array( 'key' => 'field_hero_subtitle', 'label' => 'Subtítulo',        'name' => 'hero_subtitle', 'type' => 'textarea', 'default_value' => 'Producto de temporada, fuego lento y la calidez del campo en cada plato. Reserva tu mesa y déjate llevar.', 'rows' => 3 ),
+			array( 'key' => 'field_hero_title',    'label' => 'Título',           'name' => 'hero_title',    'type' => 'text',     'default_value' => 'Sabores de nuestra tierra' ),
+			array( 'key' => 'field_hero_subtitle', 'label' => 'Subtítulo',        'name' => 'hero_subtitle', 'type' => 'textarea', 'default_value' => 'La tradición y la calidez de la cocina latinoamericana al fuego de la leña. Reserva tu mesa y déjate llevar.', 'rows' => 3 ),
 			array( 'key' => 'field_hero_cta',      'label' => 'Texto botón CTA',  'name' => 'hero_cta',      'type' => 'text',     'default_value' => 'Reserva una Mesa' ),
 		),
 	) );
@@ -200,10 +200,10 @@ function rustica_register_acf_fields() {
 	// ── MENÚ — 4 platos ───────────────────────
 	$dish_fields = array();
 	$dishes = array(
-		1 => array( 'name' => 'Cordero al horno de leña',      'desc' => 'Paletilla cocida a fuego lento con romero, miel y patatas confitadas.',        'price' => '24,50 €', 'badge' => 'Especialidad' ),
-		2 => array( 'name' => 'Risotto de setas de temporada', 'desc' => 'Arroz cremoso con boletus, parmesano curado y aceite de trufa.',                'price' => '18,00 €', 'badge' => 'Recomendado' ),
-		3 => array( 'name' => 'Huerto a la brasa',             'desc' => 'Verduras de nuestro huerto asadas con vinagreta de hierbas y queso de cabra.', 'price' => '15,50 €', 'badge' => 'Recomendado' ),
-		4 => array( 'name' => 'Tarta rústica de manzana',      'desc' => 'Masa quebrada artesanal, manzana caramelizada y helado de vainilla.',           'price' => '8,50 €',  'badge' => '' ),
+		1 => array( 'name' => 'Lomo Saltado',      'desc' => 'Tiras de res al wok con cebolla, tomate, ají amarillo, servido con papas fritas y arroz.',        'price' => '22,00 €', 'badge' => 'Especialidad' ),
+		2 => array( 'name' => 'Ceviche Clásico', 'desc' => 'Pescado blanco marinado en leche de tigre con cebolla morada, camote y choclo.',                'price' => '15,00 €', 'badge' => 'Recomendado' ),
+		3 => array( 'name' => 'Arepa Reina Pepiada',             'desc' => 'Arepa de maíz rellena de ensalada de pollo desmechado y aguacate cremoso.', 'price' => '9,00 €', 'badge' => 'Recomendado' ),
+		4 => array( 'name' => 'Tres Leches Tres Sabores',      'desc' => 'Bizcocho tradicional bañado en tres leches con un toque de canela y merengue.',           'price' => '8,50 €',  'badge' => '' ),
 	);
 
 	foreach ( $dishes as $n => $d ) {
@@ -237,10 +237,10 @@ function rustica_register_acf_fields() {
 		) ) ),
 		'menu_order' => 20,
 		'fields'     => array(
-			array( 'key' => 'field_contact_address', 'label' => 'Dirección', 'name' => 'contact_address', 'type' => 'text',     'default_value' => 'Camino del Molino 12, 28010 Madrid, España' ),
-			array( 'key' => 'field_contact_phone',   'label' => 'Teléfono',  'name' => 'contact_phone',   'type' => 'text',     'default_value' => '+34 910 123 456' ),
-			array( 'key' => 'field_contact_email',   'label' => 'Email',     'name' => 'contact_email',   'type' => 'email',    'default_value' => 'hola@rustica.example' ),
-			array( 'key' => 'field_contact_hours',   'label' => 'Horarios',  'name' => 'contact_hours',   'type' => 'textarea', 'default_value' => 'Mar–Dom: 13:00–16:00 y 20:00–23:30 · Lunes cerrado', 'rows' => 2 ),
+			array( 'key' => 'field_contact_address', 'label' => 'Dirección', 'name' => 'contact_address', 'type' => 'text',     'default_value' => 'Calle de la Tradición 123, 28010 Madrid, España' ),
+			array( 'key' => 'field_contact_phone',   'label' => 'Teléfono',  'name' => 'contact_phone',   'type' => 'text',     'default_value' => '+34 912 345 678' ),
+			array( 'key' => 'field_contact_email',   'label' => 'Email',     'name' => 'contact_email',   'type' => 'email',    'default_value' => 'contacto@larusticamesa.com' ),
+			array( 'key' => 'field_contact_hours',   'label' => 'Horarios',  'name' => 'contact_hours',   'type' => 'textarea', 'default_value' => 'Mar–Dom: 13:00–23:30 · Lunes cerrado', 'rows' => 2 ),
 			array( 'key' => 'field_contact_map',     'label' => 'URL embed mapa (iframe src)', 'name' => 'contact_map', 'type' => 'url', 'default_value' => 'https://maps.google.com/maps?q=Madrid,Spain&output=embed' ),
 		),
 	) );

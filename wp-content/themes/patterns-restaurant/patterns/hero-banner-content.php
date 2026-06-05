@@ -17,11 +17,11 @@
 	
 <!-- wp:group {"align":"wide","style":{"spacing":{"blockGap":"0"}},"layout":{"type":"constrained","contentSize":"","justifyContent":"center","wideSize":""}} -->
 <div class="wp-block-group alignwide"><!-- wp:paragraph {"align":"left","style":{"typography":{"textTransform":"uppercase"}},"fontSize":"x-small"} -->
-<p class="has-text-align-left has-x-small-font-size" style="text-transform:uppercase"><?php esc_html_e( 'Hello, new friend!', 'patterns-restaurant' ); ?></p>
+<p class="has-text-align-left has-x-small-font-size" style="text-transform:uppercase"><?php esc_html_e( '¡Bienvenidos a nuestra mesa!', 'patterns-restaurant' ); ?></p>
 <!-- /wp:paragraph -->
 
 <!-- wp:heading {"textAlign":"left","level":1} -->
-<h1 class="wp-block-heading has-text-align-left"><?php esc_html_e( 'Taste The Difference', 'patterns-restaurant' ); ?></h1>
+<h1 class="wp-block-heading has-text-align-left"><?php esc_html_e( 'La Rústica Mesa', 'patterns-restaurant' ); ?></h1>
 <!-- /wp:heading -->
 
 <!-- wp:spacer {"height":"var:preset|spacing|20"} -->
@@ -29,7 +29,7 @@
 <!-- /wp:spacer -->
 
 <!-- wp:paragraph {"align":"left","fontSize":"medium"} -->
-<p class="has-text-align-left has-medium-font-size"><?php esc_html_e( 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut', 'patterns-restaurant' ); ?></p>
+<p class="has-text-align-left has-medium-font-size"><?php esc_html_e( 'Sabores auténticos que cruzan fronteras. Disfruta de una experiencia culinaria única que rinde homenaje a las ricas tradiciones de la cocina latinoamericana, con el toque rústico de la leña y el carbón.', 'patterns-restaurant' ); ?></p>
 <!-- /wp:paragraph -->
 
 <!-- wp:spacer {"height":"var:preset|spacing|20"} -->
@@ -38,7 +38,7 @@
 
 <!-- wp:buttons {"layout":{"type":"flex","justifyContent":"left"}} -->
 <div class="wp-block-buttons"><!-- wp:button {"className":"is-style-fill"} -->
-<div class="wp-block-button is-style-fill"><a class="wp-block-button__link wp-element-button"><?php esc_html_e( 'Explore Mor', 'patterns-restaurant' ); ?>e</a></div>
+<div class="wp-block-button is-style-fill"><a class="wp-block-button__link wp-element-button"><?php esc_html_e( 'Ver Menú', 'patterns-restaurant' ); ?></a></div>
 <!-- /wp:button --></div>
 <!-- /wp:buttons --></div>
 <!-- /wp:group -->

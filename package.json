@@ -4,7 +4,7 @@
   "description": "Landing page Restaurante Rústica — base para tema WordPress",
   "type": "module",
   "scripts": {
-    "build": "tsc",
+    "build": "node scripts/copy-assets.js && tsc",
     "dev": "npx live-server src --port=3000 --no-browser",
     "test": "vitest run",
     "test:watch": "vitest",

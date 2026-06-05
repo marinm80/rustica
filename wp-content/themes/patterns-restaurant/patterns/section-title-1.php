@@ -18,11 +18,11 @@
 <!-- /wp:separator -->
 
 <!-- wp:heading {"textAlign":"left","level":6,"style":{"typography":{"fontStyle":"normal","fontWeight":"400","textTransform":"uppercase","letterSpacing":"1px"}},"textColor":"secondary"} -->
-<h6 class="wp-block-heading has-text-align-left has-secondary-color has-text-color" style="font-style:normal;font-weight:400;letter-spacing:1px;text-transform:uppercase"><?php esc_html_e( 'About Us', 'patterns-restaurant' ); ?></h6>
+<h6 class="wp-block-heading has-text-align-left has-secondary-color has-text-color" style="font-style:normal;font-weight:400;letter-spacing:1px;text-transform:uppercase"><?php esc_html_e( 'Nuestra Historia', 'patterns-restaurant' ); ?></h6>
 <!-- /wp:heading --></div>
 <!-- /wp:group -->
 
 <!-- wp:heading {"textAlign":"left"} -->
-<h2 class="wp-block-heading has-text-align-left"><?php esc_html_e( 'We invite you to visit our restaurant', 'patterns-restaurant' ); ?></h2>
+<h2 class="wp-block-heading has-text-align-left"><?php esc_html_e( 'Una mesa latina llena de sabor, tradición y familia', 'patterns-restaurant' ); ?></h2>
 <!-- /wp:heading --></div>
 <!-- /wp:group -->

@@ -28,12 +28,12 @@
 <!-- /wp:separator -->
 
 <!-- wp:heading {"textAlign":"left","level":6,"style":{"typography":{"fontStyle":"normal","fontWeight":"400","textTransform":"uppercase","letterSpacing":"1px"}}} -->
-<h6 class="wp-block-heading has-text-align-left" style="font-style:normal;font-weight:400;letter-spacing:1px;text-transform:uppercase"><?php esc_html_e( 'Reservations', 'patterns-restaurant' ); ?></h6>
+<h6 class="wp-block-heading has-text-align-left" style="font-style:normal;font-weight:400;letter-spacing:1px;text-transform:uppercase"><?php esc_html_e( 'Reservas', 'patterns-restaurant' ); ?></h6>
 <!-- /wp:heading --></div>
 <!-- /wp:group -->
 
 <!-- wp:heading {"textAlign":"left"} -->
-<h2 class="wp-block-heading has-text-align-left"><?php esc_html_e( 'Private Dinners &amp; Happy Hours', 'patterns-restaurant' ); ?></h2>
+<h2 class="wp-block-heading has-text-align-left"><?php esc_html_e( 'Cenas Privadas y Eventos Especiales', 'patterns-restaurant' ); ?></h2>
 <!-- /wp:heading --></div>
 <!-- /wp:group -->
 
@@ -45,7 +45,7 @@
 	
 <!-- wp:buttons {"layout":{"type":"flex","justifyContent":"left"}} -->
 <div class="wp-block-buttons"><!-- wp:button {"textAlign":"center","width":100,"className":"is-style-fill"} -->
-<div class="wp-block-button has-custom-width wp-block-button__width-100 is-style-fill"><a class="wp-block-button__link has-text-align-center wp-element-button"><?php esc_html_e( 'Book A Table', 'patterns-restaurant' ); ?></a></div>
+<div class="wp-block-button has-custom-width wp-block-button__width-100 is-style-fill"><a class="wp-block-button__link has-text-align-center wp-element-button"><?php esc_html_e( 'Reservar una Mesa', 'patterns-restaurant' ); ?></a></div>
 <!-- /wp:button --></div>
 <!-- /wp:buttons -->
 

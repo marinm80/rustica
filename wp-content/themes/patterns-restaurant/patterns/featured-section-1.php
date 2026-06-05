@@ -43,16 +43,16 @@
 <!-- wp:pattern {"slug":"patterns-restaurant/section-title-1"} /-->
 
 <!-- wp:paragraph {"align":"left","fontSize":"medium"} -->
-<p class="has-text-align-left has-medium-font-size"><?php esc_html_e( '“Action ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate”.', 'patterns-restaurant' ); ?></p>
+<p class="has-text-align-left has-medium-font-size"><?php esc_html_e( '“La comida es nuestra forma de compartir amor, cultura y la alegría de estar juntos alrededor de una buena mesa”.', 'patterns-restaurant' ); ?></p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"align":"left","style":{"typography":{"lineHeight":"1.7"}},"fontSize":"small"} -->
-<p class="has-text-align-left has-small-font-size" style="line-height:1.7"><?php esc_html_e( 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas voluptatem maiores eaque similique non distinctio voluptates perspiciatis Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas voluptatem maiores eaque similique non distinctio voluptates perspiciatis', 'patterns-restaurant' ); ?></p>
+<p class="has-text-align-left has-small-font-size" style="line-height:1.7"><?php esc_html_e( 'En La Rústica Mesa fusionamos recetas ancestrales con técnicas contemporáneas. Cada plato cuenta una historia: desde el frescor vibrante de nuestros ceviches hasta la calidez de nuestras arepas de maíz peto hechas a mano y el ahumado de nuestras carnes.', 'patterns-restaurant' ); ?></p>
 <!-- /wp:paragraph -->
 
 <!-- wp:buttons -->
 <div class="wp-block-buttons"><!-- wp:button -->
-<div class="wp-block-button"><a class="wp-block-button__link wp-element-button"><?php esc_html_e( 'Explore More', 'patterns-restaurant' ); ?></a></div>
+<div class="wp-block-button"><a class="wp-block-button__link wp-element-button"><?php esc_html_e( 'Conocer Más', 'patterns-restaurant' ); ?></a></div>
 <!-- /wp:button --></div>
 <!-- /wp:buttons --></div>
 <!-- /wp:column --></div>
