@@ -1,0 +1,8 @@
+{
+    "name": "rustica/hero",
+    "title": "Hero Principal",
+    "category": "rustica",
+    "icon": "cover-image",
+    "acf": { "mode": "edit", "renderTemplate": "render.php" },
+    "supports": { "align": ["full"] }
+}

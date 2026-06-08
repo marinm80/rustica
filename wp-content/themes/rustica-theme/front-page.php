@@ -1,431 +1,293 @@
 <?php
 /**
- * Template Name: Rústica Landing Page
- * Front page — contenido gestionado desde ACF (Admin → página Inicio).
- * Fallback a valores por defecto si ACF no está activo o el campo está vacío.
+ * Plantilla de la página de inicio (front-page.php).
+ *
+ * Renderiza el landing completo de La Rustica Terrazza:
+ * Hero → Franja de datos → Filosofía → Carta destacada → Zonas interactivas → Formulario React.
+ *
+ * Las tarjetas de zona consultan mesas libres en tiempo real y emiten el evento
+ * personalizado `rustica:zona` que captura ReservasApp.jsx para preseleccionar la zona.
+ *
+ * @package Rustica_Theme
+ * @since   1.0.0
  */
+get_header(); ?>
 
-// ── Datos del Hero ────────────────────────────────────────────────────────────
-$hero_image    = rustica_field_url( 'hero_bg' );
-$hero_title    = rustica_field( 'hero_title',    'Sabores de nuestra tierra' );
-$hero_subtitle = rustica_field( 'hero_subtitle', 'La tradición y la calidez de la cocina latinoamericana al fuego de la leña. Reserva tu mesa y déjate llevar.' );
-$hero_cta      = rustica_field( 'hero_cta',      'Reserva una Mesa' );
-
-$hero_bg_style = $hero_image
-	? ' style="background-image:url(' . $hero_image . ')"'
-	: '';
-
-// ── Datos de los 4 platos ─────────────────────────────────────────────────────
-$platos_defaults = array(
-	1 => array( 'name' => 'Lomo Saltado',      'desc' => 'Tiras de res al wok con cebolla, tomate, ají amarillo, servido con papas fritas y arroz.',        'price' => '22,00 €', 'badge' => 'Especialidad', 'img' => 'cordero.jpg' ),
-	2 => array( 'name' => 'Ceviche Clásico', 'desc' => 'Pescado blanco marinado en leche de tigre con cebolla morada, camote y choclo.',                'price' => '15,00 €', 'badge' => 'Recomendado',  'img' => 'risotto.jpg' ),
-	3 => array( 'name' => 'Arepa Reina Pepiada',             'desc' => 'Arepa de maíz rellena de ensalada de pollo desmechado y aguacate cremoso.', 'price' => '9,00 €', 'badge' => 'Recomendado',  'img' => 'huerto.jpg' ),
-	4 => array( 'name' => 'Tres Leches Tres Sabores',      'desc' => 'Bizcocho tradicional bañado en tres leches con un toque de canela y merengue.',           'price' => '8,50 €',  'badge' => '',            'img' => 'tarta-manzana.jpg' ),
-);
-
-$platos = array();
-foreach ( $platos_defaults as $n => $d ) {
-	$acf_img = function_exists( 'get_field' ) ? get_field( "dish_{$n}_image" ) : '';
-	$platos[ $n ] = array(
-		'name'  => rustica_field( "dish_{$n}_name",  $d['name'] ),
-		'desc'  => rustica_field( "dish_{$n}_desc",  $d['desc'] ),
-		'price' => rustica_field( "dish_{$n}_price", $d['price'] ),
-		'badge' => rustica_field( "dish_{$n}_badge", $d['badge'] ),
-		'img'   => $acf_img
-			? esc_url( $acf_img )
-			: esc_url( get_stylesheet_directory_uri() . '/assets/img/menu/' . $d['img'] ),
-	);
-}
-
-// ── Datos de contacto ─────────────────────────────────────────────────────────
-$contact = array(
-	'address' => rustica_field( 'contact_address', 'Calle de la Tradición 123, 28010 Madrid, España' ),
-	'phone'   => rustica_field( 'contact_phone',   '+34 912 345 678' ),
-	'email'   => rustica_field( 'contact_email',   'contacto@larusticamesa.com' ),
-	'hours'   => rustica_field( 'contact_hours',   'Mar–Dom: 13:00–23:30 · Lunes cerrado' ),
-	'map'     => rustica_field_url( 'contact_map', 'https://maps.google.com/maps?q=Madrid,Spain&output=embed' ),
-);
-
-// ── Redes sociales ────────────────────────────────────────────────────────────
-$social = array(
-	'instagram'   => rustica_field_url( 'social_instagram',   '#' ),
-	'facebook'    => rustica_field_url( 'social_facebook',    '#' ),
-	'tripadvisor' => rustica_field_url( 'social_tripadvisor', '#' ),
-);
-
-// ── Imágenes de galería ───────────────────────────────────────────────────────
-$gallery_base = get_stylesheet_directory_uri() . '/assets/img/gallery/';
-$gallery = array(
-	'restaurante' => array(
-		array( 'src' => $gallery_base . 'salon-01.jpg',    'alt' => 'Salón principal de La Rústica Mesa' ),
-		array( 'src' => $gallery_base . 'terraza-02.jpg',  'alt' => 'Terraza exterior de La Rústica Mesa' ),
-		array( 'src' => $gallery_base . 'barra-03.jpg',    'alt' => 'Barra y coctelería' ),
-		array( 'src' => $gallery_base . 'chimenea-04.jpg', 'alt' => 'Rincón acogedor' ),
-	),
-	'platos' => array(
-		array( 'src' => $gallery_base . 'plato-01.jpg', 'alt' => 'Lomo Saltado' ),
-		array( 'src' => $gallery_base . 'plato-02.jpg', 'alt' => 'Ceviche Clásico' ),
-		array( 'src' => $gallery_base . 'plato-03.jpg', 'alt' => 'Arepa Reina Pepiada' ),
-		array( 'src' => $gallery_base . 'plato-04.jpg', 'alt' => 'Tres Leches Tres Sabores' ),
-	),
-);
-?><!DOCTYPE html>
-<html <?php language_attributes(); ?>>
-<head>
-  <meta charset="<?php bloginfo( 'charset' ); ?>">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <?php wp_head(); ?>
-</head>
-<body <?php body_class(); ?>>
-<?php wp_body_open(); ?>
-
-<!-- section: navbar -->
-<header>
-  <nav id="navbar" class="navbar navbar-expand-lg fixed-top navbar-transparent" aria-label="Navegación principal">
-    <div class="container">
-      <a class="navbar-brand" href="#hero"><?php bloginfo( 'name' ); ?></a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu"
-        aria-controls="navMenu" aria-expanded="false" aria-label="Abrir menú">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navMenu">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="#galeria">Galería</a></li>
-          <li class="nav-item"><a class="nav-link" href="#menu">Menú</a></li>
-          <li class="nav-item"><a class="nav-link" href="#reservas">Reservas</a></li>
-          <li class="nav-item"><a class="nav-link" href="#contacto">Contacto</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-</header>
-<!-- /section: navbar -->
-
-<main>
-
-  <!-- section: hero -->
-  <section id="hero" aria-label="Presentación del restaurante">
-    <div class="hero-bg" role="img" aria-label="Interior del restaurante Rústica"<?php echo $hero_bg_style; ?>></div>
-    <div class="hero-overlay" aria-hidden="true"></div>
-    <div class="hero-content">
-      <h1 class="hero-supertitle"><?php echo $hero_title; ?></h1>
-      <p class="hero-subtitle"><?php echo $hero_subtitle; ?></p>
-      <a href="#reservas" class="btn-rustica"><?php echo $hero_cta; ?></a>
-    </div>
-    <div class="hero-scroll-indicator" aria-hidden="true">
-      <i class="fa-solid fa-chevron-down"></i>
-    </div>
-  </section>
-  <!-- /section: hero -->
-
-  <!-- section: gallery -->
-  <section id="galeria" class="section-padding bg-cream" aria-label="Galería de imágenes">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">Descubre Rústica</h2>
-        <hr class="section-divider">
-        <p class="section-subtitle">El ambiente y los sabores que nos definen</p>
-        <ul class="nav gallery-tabs justify-content-center mb-4" id="galleryTabs" role="tablist">
-          <li class="nav-item" role="presentation">
-            <button class="nav-link active" id="tab-restaurante" data-bs-toggle="tab"
-              data-bs-target="#pane-restaurante" type="button" role="tab"
-              aria-controls="pane-restaurante" aria-selected="true">El Restaurante</button>
-          </li>
-          <li class="nav-item" role="presentation">
-            <button class="nav-link" id="tab-platos" data-bs-toggle="tab"
-              data-bs-target="#pane-platos" type="button" role="tab"
-              aria-controls="pane-platos" aria-selected="false">Nuestros Platos</button>
-          </li>
-        </ul>
-      </div>
-
-      <div class="tab-content" id="galleryTabContent">
-        <?php foreach ( array( 'restaurante', 'platos' ) as $tab ) :
-          $active = $tab === 'restaurante' ? 'show active' : '';
-          $tab_id = "pane-{$tab}";
-          $label  = "tab-{$tab}";
-        ?>
-        <div class="tab-pane fade <?php echo $active; ?>" id="<?php echo $tab_id; ?>"
-          role="tabpanel" aria-labelledby="<?php echo $label; ?>">
-          <div class="gallery-grid">
-            <?php foreach ( $gallery[ $tab ] as $img ) : ?>
-            <button class="gallery-item"
-              data-lightbox-src="<?php echo esc_attr( $img['src'] ); ?>"
-              data-lightbox-alt="<?php echo esc_attr( $img['alt'] ); ?>"
-              aria-label="Ampliar: <?php echo esc_attr( $img['alt'] ); ?>">
-              <img src="<?php echo esc_url( $img['src'] ); ?>"
-                   alt="<?php echo esc_attr( $img['alt'] ); ?>"
-                   class="gallery-img" loading="lazy">
-            </button>
-            <?php endforeach; ?>
-          </div>
+<!-- HERO -->
+<section style="background-color:#1a1a1a;min-height:90vh;display:flex;align-items:center;justify-content:center;position:relative;">
+    <div style="position:absolute;inset:0;background:rgba(26,26,26,.5);"></div>
+    <div class="container text-center" style="position:relative;z-index:1;">
+        <p class="text-uppercase mb-2" style="color:#c9a84c;letter-spacing:.2em;font-size:.85rem;">Bogotá · Colombia</p>
+        <h1 class="display-2 fw-bold text-white mb-3" style="font-family:'Playfair Display',serif;">
+            La Rustica Terrazza
+        </h1>
+        <p class="lead text-white mb-5" style="max-width:560px;margin:0 auto 2rem;">
+            Cocina de autor donde cada plato cuenta una historia. Vive una experiencia gastronómica única en nuestra terrazza.
+        </p>
+        <div class="d-flex gap-3 justify-content-center flex-wrap">
+            <a href="#reservas" class="btn btn-lg px-5 py-3" style="background:#c9a84c;color:#1a1a1a;font-weight:700;border:none;">
+                Reservar mesa
+            </a>
+            <a href="/nuestra-carta" class="btn btn-lg btn-outline-light px-5 py-3">
+                Ver carta
+            </a>
         </div>
-        <?php endforeach; ?>
-      </div>
     </div>
+</section>
 
-    <div class="modal fade" id="galleryModal" tabindex="-1" aria-label="Visor ampliado" aria-modal="true" role="dialog">
-      <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-          <div class="modal-body">
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-            <img id="lightboxImg" src="" alt="" class="img-fluid">
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- /section: gallery -->
-
-  <!-- section: menu -->
-  <section id="menu" class="section-padding bg-beige" aria-label="Platos destacados">
+<!-- FRANJA DE DATOS -->
+<section class="py-4" style="background:#111;">
     <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">Nuestra Cocina</h2>
-        <hr class="section-divider">
-        <p class="section-subtitle">Cuatro platos que resumen nuestra filosofía</p>
-      </div>
-      <div class="row g-4">
-        <?php foreach ( $platos as $plato ) :
-          $badge_class = $plato['badge'] === 'Especialidad'
-            ? 'menu-badge--especialidad'
-            : ( $plato['badge'] === 'Recomendado' ? 'menu-badge--recomendado' : '' );
-        ?>
-        <div class="col-12 col-sm-6 col-lg-3">
-          <article class="menu-card">
-            <div class="menu-card-img-wrapper">
-              <img src="<?php echo $plato['img']; ?>" alt="<?php echo $plato['name']; ?>" loading="lazy">
-              <?php if ( $plato['badge'] ) : ?>
-              <span class="menu-badge <?php echo $badge_class; ?>"><?php echo $plato['badge']; ?></span>
-              <?php endif; ?>
+        <div class="row text-center g-3">
+            <div class="col-6 col-md-3">
+                <p class="mb-0 text-white fw-bold">Lun – Vie</p>
+                <p class="mb-0 small" style="color:#c9a84c;">12:00 – 22:00</p>
             </div>
-            <div class="menu-card-body">
-              <h3 class="menu-card-title"><?php echo $plato['name']; ?></h3>
-              <p class="menu-card-desc"><?php echo $plato['desc']; ?></p>
-              <span class="menu-price"><?php echo $plato['price']; ?></span>
+            <div class="col-6 col-md-3">
+                <p class="mb-0 text-white fw-bold">Sáb – Dom</p>
+                <p class="mb-0 small" style="color:#c9a84c;">12:00 – 23:00</p>
             </div>
-          </article>
+            <div class="col-6 col-md-3">
+                <p class="mb-0 text-white fw-bold">Reservaciones</p>
+                <p class="mb-0 small" style="color:#c9a84c;">+57 1 234 5678</p>
+            </div>
+            <div class="col-6 col-md-3">
+                <p class="mb-0 text-white fw-bold">Zonas</p>
+                <p class="mb-0 small" style="color:#c9a84c;">Salón · Terrazza · VIP</p>
+            </div>
         </div>
-        <?php endforeach; ?>
-      </div>
     </div>
-  </section>
-  <!-- /section: menu -->
+</section>
 
-  <!-- section: reservation -->
-  <section id="reservas" class="section-padding bg-cream" aria-label="Sistema de reservas">
+<!-- NUESTRA PROPUESTA -->
+<section class="py-5" style="background:#f5f0e8;">
     <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">Reserva tu Mesa</h2>
-        <hr class="section-divider">
-        <p class="section-subtitle">Cuéntanos cuándo vienes y te esperamos</p>
-      </div>
-      <div class="reservation-wrapper">
-        <div class="row g-0">
-          <div class="col-lg-5 d-none d-lg-block">
-            <div class="reservation-image-side" style="background-image: url('<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/img/gallery/mesa-reservada.jpg' ); ?>');"></div>
-          </div>
-          <div class="col-lg-7">
-            <div class="reservation-form-container">
-              <form id="reservationForm" novalidate aria-label="Formulario de reserva">
-                <?php wp_nonce_field( 'rustica_reservation', 'rustica_nonce' ); ?>
+        <div class="row align-items-center g-5">
+            <div class="col-md-6">
+                <p class="text-uppercase mb-2" style="color:#c9a84c;letter-spacing:.15em;font-size:.8rem;">Nuestra filosofía</p>
+                <h2 style="font-family:'Playfair Display',serif;color:#1a1a1a;" class="mb-4">
+                    Ingredientes locales,<br>técnica internacional
+                </h2>
+                <p class="mb-3" style="color:#555;">
+                    Trabajamos con productores colombianos para traer lo mejor de cada región a tu mesa. Cada temporada trae nuevos sabores, nuevas historias.
+                </p>
+                <p style="color:#555;">
+                    Nuestro equipo de cocina combina técnicas contemporáneas con recetas de tradición para crear una experiencia que va más allá del plato.
+                </p>
+                <a href="/nuestra-carta" class="btn mt-3 px-4 py-2" style="background:#1a1a1a;color:#c9a84c;font-weight:600;border:none;">
+                    Explorar menú →
+                </a>
+            </div>
+            <div class="col-md-6">
                 <div class="row g-3">
-                  <div class="col-12 col-md-6">
-                    <label for="res-name" class="form-label">Nombre completo</label>
-                    <input type="text" class="form-control" id="res-name" name="name" placeholder="Tu nombre" required autocomplete="name">
-                    <div class="invalid-feedback">El nombre es obligatorio.</div>
-                  </div>
-                  <div class="col-12 col-md-6">
-                    <label for="res-email" class="form-label">Correo electrónico</label>
-                    <input type="email" class="form-control" id="res-email" name="email" placeholder="tu@correo.com" required autocomplete="email">
-                    <div class="invalid-feedback">Introduce un correo válido.</div>
-                  </div>
-                  <div class="col-12 col-md-6">
-                    <label for="res-phone" class="form-label">Teléfono</label>
-                    <input type="tel" class="form-control" id="res-phone" name="phone" placeholder="+34 612 345 678" required autocomplete="tel">
-                    <div class="invalid-feedback">El teléfono es obligatorio (mín. 7 dígitos).</div>
-                  </div>
-                  <div class="col-12 col-md-6">
-                    <label for="res-party" class="form-label">Número de personas</label>
-                    <input type="number" class="form-control" id="res-party" name="partySize" min="1" max="30" value="2" required>
-                    <div class="invalid-feedback">Entre 1 y 30 personas.</div>
-                  </div>
-                  <div class="col-12 col-md-6">
-                    <label for="res-date" class="form-label">Fecha</label>
-                    <input type="date" class="form-control" id="res-date" name="date" required>
-                    <div class="invalid-feedback">Selecciona una fecha válida (hoy o posterior).</div>
-                  </div>
-                  <div class="col-12 col-md-6">
-                    <label for="res-time" class="form-label">Hora</label>
-                    <select class="form-select" id="res-time" name="time" required>
-                      <option value="" disabled selected>Selecciona hora</option>
-                      <?php for ( $h = 12; $h < 24; $h++ ) {
-                        foreach ( array( '00', '30' ) as $m ) {
-                          $val = sprintf( '%02d:%s', $h, $m );
-                          echo '<option value="' . esc_attr( $val ) . '">' . esc_html( $val ) . "</option>\n";
-                        }
-                      } ?>
-                    </select>
-                    <div class="invalid-feedback">Selecciona una hora.</div>
-                  </div>
-                  <div class="col-12">
-                    <div id="reservationAlert"></div>
-                    <button type="submit" class="btn-rustica w-100"><?php echo esc_html( $hero_cta ); ?></button>
-                    <p class="reservation-cta-note">
-                      <i class="fa-solid fa-users fa-sm me-1"></i>
-                      Para grupos de más de 30 personas, <a href="#contacto">contáctanos por eventos</a>.
-                    </p>
-                  </div>
+                    <div class="col-6">
+                        <div class="p-4 text-center rounded" style="background:#1a1a1a;">
+                            <p class="display-6 fw-bold mb-1" style="color:#c9a84c;">30+</p>
+                            <p class="text-white small mb-0">Platillos de temporada</p>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="p-4 text-center rounded" style="background:#1a1a1a;">
+                            <p class="display-6 fw-bold mb-1" style="color:#c9a84c;">8</p>
+                            <p class="text-white small mb-0">Años de experiencia</p>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="p-4 text-center rounded" style="background:#1a1a1a;">
+                            <p class="display-6 fw-bold mb-1" style="color:#c9a84c;">30</p>
+                            <p class="text-white small mb-0">Mesas disponibles</p>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="p-4 text-center rounded" style="background:#1a1a1a;">
+                            <p class="display-6 fw-bold mb-1" style="color:#c9a84c;">★ 4.9</p>
+                            <p class="text-white small mb-0">Valoración clientes</p>
+                        </div>
+                    </div>
                 </div>
-              </form>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </section>
-  <!-- /section: reservation -->
+</section>
 
-  <!-- section: contact -->
-  <section id="contacto" class="section-padding bg-beige" aria-label="Contacto y eventos">
+<!-- CARTA DESTACADA -->
+<section class="py-5" style="background:#fff;">
     <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">Encuéntranos</h2>
-        <hr class="section-divider">
-        <p class="section-subtitle">Ven a visitarnos o escríbenos para tu próximo evento</p>
-      </div>
-      <div class="row g-5">
-        <div class="col-12 col-lg-5">
-          <div class="contact-info-item">
-            <span class="contact-info-icon"><i class="fa-solid fa-location-dot"></i></span>
-            <div class="contact-info-text">
-              <strong>Dirección</strong>
-              <span><?php echo $contact['address']; ?></span>
-            </div>
-          </div>
-          <div class="contact-info-item">
-            <span class="contact-info-icon"><i class="fa-solid fa-phone"></i></span>
-            <div class="contact-info-text">
-              <strong>Teléfono</strong>
-              <span><a href="tel:<?php echo esc_attr( preg_replace( '/\s+/', '', $contact['phone'] ) ); ?>"><?php echo $contact['phone']; ?></a></span>
-            </div>
-          </div>
-          <div class="contact-info-item">
-            <span class="contact-info-icon"><i class="fa-solid fa-envelope"></i></span>
-            <div class="contact-info-text">
-              <strong>Email</strong>
-              <span><a href="mailto:<?php echo esc_attr( $contact['email'] ); ?>"><?php echo $contact['email']; ?></a></span>
-            </div>
-          </div>
-          <div class="contact-info-item">
-            <span class="contact-info-icon"><i class="fa-solid fa-clock"></i></span>
-            <div class="contact-info-text">
-              <strong>Horarios</strong>
-              <span><?php echo nl2br( $contact['hours'] ); ?></span>
-            </div>
-          </div>
-          <div class="map-placeholder mt-4" aria-label="Mapa de ubicación">
-            <iframe src="https://maps.google.com/maps?q=Madrid,Spain&output=embed"
-              title="Ubicación Rústica" loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
-              aria-hidden="true" tabindex="-1"></iframe>
-          </div>
+        <div class="text-center mb-5">
+            <p class="text-uppercase mb-2" style="color:#c9a84c;letter-spacing:.15em;font-size:.8rem;">Lo mejor de hoy</p>
+            <h2 style="font-family:'Playfair Display',serif;color:#1a1a1a;">Carta destacada</h2>
         </div>
-
-        <div class="col-12 col-lg-7">
-          <div class="events-form-wrapper">
-            <img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/img/gallery/catering-event.jpg' ); ?>" alt="Servicio de catering y eventos de cocina latina" class="events-form-img">
-            <h3 class="events-form-title">Catering y Eventos Privados</h3>
-            <form id="eventsForm" novalidate aria-label="Formulario de eventos y catering">
-              <?php wp_nonce_field( 'rustica_events', 'rustica_events_nonce' ); ?>
-              <div class="row g-3">
-                <div class="col-12 col-md-6">
-                  <label for="evt-name" class="form-label">Nombre</label>
-                  <input type="text" class="form-control" id="evt-name" name="name" placeholder="Tu nombre" required autocomplete="name">
-                  <div class="invalid-feedback">El nombre es obligatorio.</div>
+        <?php
+        if (function_exists('wc_get_products')) :
+            $productos = wc_get_products(['limit' => 4, 'status' => 'publish']);
+        else :
+            $productos = [];
+        endif;
+        if ($productos) :
+        ?>
+        <div class="row g-4">
+            <?php foreach ($productos as $producto) : ?>
+            <div class="col-sm-6 col-lg-3">
+                <div class="card h-100 border-0 shadow-sm" style="border-radius:.75rem;overflow:hidden;">
+                    <?php if ($producto->get_image_id()) : ?>
+                        <img src="<?php echo esc_url(wp_get_attachment_image_url($producto->get_image_id(), 'rustica-card')); ?>"
+                             class="card-img-top" style="height:200px;object-fit:cover;"
+                             alt="<?php echo esc_attr($producto->get_name()); ?>">
+                    <?php else : ?>
+                        <div style="height:200px;background:#f5f0e8;display:flex;align-items:center;justify-content:center;font-size:2.5rem;">
+                            🍽
+                        </div>
+                    <?php endif; ?>
+                    <div class="card-body">
+                        <h5 class="card-title" style="font-family:'Playfair Display',serif;">
+                            <?php echo esc_html($producto->get_name()); ?>
+                        </h5>
+                        <p class="card-text text-muted small">
+                            <?php echo wp_trim_words($producto->get_short_description(), 12); ?>
+                        </p>
+                    </div>
+                    <div class="card-footer bg-white border-0 d-flex justify-content-between align-items-center">
+                        <strong style="color:#c9a84c;font-size:1.1rem;">
+                            $<?php echo number_format((float) $producto->get_price(), 0, ',', '.'); ?>
+                        </strong>
+                    </div>
                 </div>
-                <div class="col-12 col-md-6">
-                  <label for="evt-email" class="form-label">Correo electrónico</label>
-                  <input type="email" class="form-control" id="evt-email" name="email" placeholder="tu@correo.com" required autocomplete="email">
-                  <div class="invalid-feedback">Introduce un correo válido.</div>
-                </div>
-                <div class="col-12 col-md-6">
-                  <label for="evt-phone" class="form-label">Teléfono <span class="text-muted fw-normal">(opcional)</span></label>
-                  <input type="tel" class="form-control" id="evt-phone" name="phone" placeholder="+34 612 345 678" autocomplete="tel">
-                  <div class="invalid-feedback">El teléfono debe tener al menos 7 dígitos.</div>
-                </div>
-                <div class="col-12 col-md-6">
-                  <label for="evt-type" class="form-label">Tipo de evento</label>
-                  <select class="form-select" id="evt-type" name="eventType" required>
-                    <option value="" disabled selected>Selecciona</option>
-                    <option value="Boda">Boda</option>
-                    <option value="Cumpleaños">Cumpleaños</option>
-                    <option value="Corporativo">Corporativo</option>
-                    <option value="Otro">Otro</option>
-                  </select>
-                  <div class="invalid-feedback">Selecciona el tipo de evento.</div>
-                </div>
-                <div class="col-12 col-md-6">
-                  <label for="evt-date" class="form-label">Fecha del evento</label>
-                  <input type="date" class="form-control" id="evt-date" name="date" required>
-                  <div class="invalid-feedback">Selecciona una fecha válida (hoy o posterior).</div>
-                </div>
-                <div class="col-12 col-md-6">
-                  <label for="evt-guests" class="form-label">Número de invitados</label>
-                  <input type="number" class="form-control" id="evt-guests" name="guests" min="1" max="300" placeholder="50" required>
-                  <div class="invalid-feedback">Entre 1 y 300 invitados.</div>
-                </div>
-                <div class="col-12">
-                  <label for="evt-message" class="form-label">Cuéntanos sobre tu evento</label>
-                  <textarea class="form-control" id="evt-message" name="message" rows="4"
-                    placeholder="Describe el tipo de evento, necesidades especiales, menú deseado..." required></textarea>
-                  <div class="invalid-feedback">El mensaje es obligatorio.</div>
-                </div>
-                <div class="col-12">
-                  <div id="eventsAlert"></div>
-                  <button type="submit" class="btn-rustica w-100">Enviar Solicitud</button>
-                </div>
-              </div>
-            </form>
-          </div>
+            </div>
+            <?php endforeach; ?>
         </div>
-      </div>
+        <div class="text-center mt-4">
+            <a href="/nuestra-carta" class="btn px-5 py-2" style="border:2px solid #1a1a1a;color:#1a1a1a;font-weight:600;">
+                Ver toda la carta
+            </a>
+        </div>
+        <?php else : ?>
+        <p class="text-center text-muted">Pronto publicaremos nuestra carta completa.</p>
+        <?php endif; ?>
     </div>
-  </section>
-  <!-- /section: contact -->
+</section>
 
-</main>
+<!-- ZONAS DEL RESTAURANTE -->
+<section class="py-5" style="background:#1a1a1a;">
+    <div class="container">
+        <div class="text-center mb-5">
+            <p class="text-uppercase mb-2" style="color:#c9a84c;letter-spacing:.15em;font-size:.8rem;">Nuestros espacios</p>
+            <h2 style="font-family:'Playfair Display',serif;color:#fff;">Elige tu ambiente</h2>
+            <p style="color:#aaa;max-width:500px;margin:.5rem auto 0;">Haz clic en la zona que prefieras para reservar tu mesa directamente.</p>
+        </div>
+        <div class="row g-4">
+            <?php
+            $zonas_config = [
+                'salon-principal' => [
+                    'nombre' => 'Salón Principal',
+                    'desc'   => 'Mesas para grupos desde 2 personas. El corazón del restaurante.',
+                ],
+                'la-terrazza' => [
+                    'nombre' => 'La Terrazza',
+                    'desc'   => 'Mesas al aire libre con vista panorámica. Para disfrutar el ambiente.',
+                ],
+                'zona-vip' => [
+                    'nombre' => 'Zona VIP',
+                    'desc'   => 'Mesas privadas con consumo mínimo. Para experiencias exclusivas.',
+                ],
+            ];
 
-<!-- section: footer -->
-<footer role="contentinfo">
-  <div class="container text-center">
-    <span class="footer-logo"><?php bloginfo( 'name' ); ?></span>
-    <p class="footer-tagline">Cocina de campo, alma de hogar</p>
-    <nav class="footer-social" aria-label="Redes sociales">
-      <a href="<?php echo $social['instagram']; ?>" aria-label="Instagram" rel="noopener noreferrer" target="_blank">
-        <i class="fa-brands fa-instagram" aria-hidden="true"></i>
-      </a>
-      <a href="<?php echo $social['facebook']; ?>" aria-label="Facebook" rel="noopener noreferrer" target="_blank">
-        <i class="fa-brands fa-facebook-f" aria-hidden="true"></i>
-      </a>
-      <a href="<?php echo $social['tripadvisor']; ?>" aria-label="TripAdvisor" rel="noopener noreferrer" target="_blank">
-        <i class="fa-brands fa-tripadvisor" aria-hidden="true"></i>
-      </a>
-    </nav>
-    <nav class="footer-links" aria-label="Navegación del pie de página">
-      <a href="#galeria">Galería</a>
-      <a href="#menu">Menú</a>
-      <a href="#reservas">Reservas</a>
-      <a href="#contacto">Contacto</a>
-    </nav>
-    <hr class="footer-divider">
-    <p class="footer-copyright">
-      &copy; <?php echo date( 'Y' ); ?> <?php bloginfo( 'name' ); ?>. Todos los derechos reservados.
-    </p>
-  </div>
-</footer>
-<!-- /section: footer -->
+            foreach ($zonas_config as $slug => $cfg) :
+                // Contar mesas libres en esta zona
+                $q_libre = new WP_Query([
+                    'post_type'      => 'mesa',
+                    'posts_per_page' => -1,
+                    'fields'         => 'ids',
+                    'tax_query'      => [[
+                        'taxonomy' => 'zona_restaurante',
+                        'field'    => 'slug',
+                        'terms'    => $slug,
+                    ]],
+                    'meta_query' => [[
+                        'key'     => 'estado',
+                        'value'   => 'libre',
+                    ]],
+                ]);
+                $total_libre = $q_libre->found_posts;
+                $sin_mesas   = $total_libre === 0;
+            ?>
+            <div class="col-md-4">
+                <div
+                    class="rustica-zona-card p-4 h-100"
+                    data-zona="<?php echo esc_attr($slug); ?>"
+                    style="
+                        border: 1px solid <?php echo $sin_mesas ? '#555' : '#c9a84c44'; ?>;
+                        border-radius: .75rem;
+                        cursor: <?php echo $sin_mesas ? 'not-allowed' : 'pointer'; ?>;
+                        opacity: <?php echo $sin_mesas ? '.5' : '1'; ?>;
+                        transition: border-color .2s, transform .2s, box-shadow .2s;
+                        position: relative;
+                    "
+                >
+                    <?php if (!$sin_mesas) : ?>
+                    <span style="
+                        position:absolute;top:12px;right:14px;
+                        background:#c9a84c;color:#1a1a1a;
+                        font-size:11px;font-weight:700;
+                        padding:3px 10px;border-radius:20px;
+                    ">Reservar →</span>
+                    <?php endif; ?>
 
-<?php wp_footer(); ?>
-</body>
-</html>
+                    <h4 style="color:#c9a84c;font-family:'Playfair Display',serif;" class="mb-2">
+                        <?php echo esc_html($cfg['nombre']); ?>
+                    </h4>
+                    <p style="color:#aaa;" class="small mb-3"><?php echo esc_html($cfg['desc']); ?></p>
+
+                    <?php if ($sin_mesas) : ?>
+                        <p class="mb-0 small" style="color:#e74c3c;font-weight:600;">
+                            Sin mesas disponibles por el momento
+                        </p>
+                    <?php else : ?>
+                        <p class="mb-0 small" style="color:#c9a84c;">
+                            <?php echo $total_libre; ?> mesa<?php echo $total_libre !== 1 ? 's' : ''; ?> disponible<?php echo $total_libre !== 1 ? 's' : ''; ?>
+                        </p>
+                    <?php endif; ?>
+                </div>
+            </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</section>
+
+<script>
+document.querySelectorAll('.rustica-zona-card').forEach(function(card) {
+    if (card.style.cursor === 'not-allowed') return;
+    card.addEventListener('mouseenter', function() {
+        this.style.borderColor  = '#c9a84c';
+        this.style.transform    = 'translateY(-4px)';
+        this.style.boxShadow    = '0 8px 24px rgba(201,168,76,.2)';
+    });
+    card.addEventListener('mouseleave', function() {
+        this.style.borderColor  = 'rgba(201,168,76,.27)';
+        this.style.transform    = 'translateY(0)';
+        this.style.boxShadow    = 'none';
+    });
+    card.addEventListener('click', function() {
+        var zona = this.dataset.zona;
+        window.RusticaZonaPreseleccionada = zona;
+        document.dispatchEvent(new CustomEvent('rustica:zona', { detail: { zona: zona } }));
+        var target = document.getElementById('reservas');
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+});
+</script>
+
+<!-- RESERVA -->
+<section id="reservas" class="py-5" style="background:#f5f0e8;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-7 text-center">
+                <p class="text-uppercase mb-2" style="color:#c9a84c;letter-spacing:.15em;font-size:.8rem;">¿Listo para visitarnos?</p>
+                <h2 style="font-family:'Playfair Display',serif;color:#1a1a1a;" class="mb-3">Reserva tu mesa</h2>
+                <p class="text-muted mb-4">Reserva en línea en menos de 2 minutos. Confirmación inmediata por correo.</p>
+                <?php echo do_shortcode('[rustica_reservas]'); ?>
+            </div>
+        </div>
+    </div>
+</section>
+
+<?php get_footer(); ?>

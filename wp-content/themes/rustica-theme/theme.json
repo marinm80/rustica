@@ -1,0 +1,23 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/theme.json",
+    "version": 2,
+    "settings": {
+        "color": {
+            "palette": [
+                { "slug": "rustica-negro",  "color": "#1a1a1a", "name": "Negro" },
+                { "slug": "rustica-oro",    "color": "#c9a84c", "name": "Oro" },
+                { "slug": "rustica-crema",  "color": "#f5f0e8", "name": "Crema" },
+                { "slug": "rustica-blanco", "color": "#ffffff", "name": "Blanco" }
+            ],
+            "custom": false,
+            "defaultPalette": false
+        },
+        "typography": {
+            "fontFamilies": [
+                { "fontFamily": "'Playfair Display', serif", "slug": "playfair", "name": "Playfair Display" },
+                { "fontFamily": "'Inter', sans-serif",       "slug": "inter",    "name": "Inter" }
+            ],
+            "customFontSize": false
+        }
+    }
+}

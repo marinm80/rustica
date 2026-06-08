@@ -1,0 +1,7 @@
+{
+    "name": "rustica/menu-showcase",
+    "title": "Menu Showcase",
+    "category": "rustica",
+    "icon": "food",
+    "acf": { "mode": "edit", "renderTemplate": "render.php" }
+}

@@ -1,314 +1,77 @@
 <?php
 /**
- * Rústica Theme — functions.php
+ * Rustica Theme — functions.php
+ *
+ * Bootstrap 5 CDN, WooCommerce support, ACF Blocks registration.
+ *
+ * @package Rustica_Theme
+ * @since   1.0.0
  */
 
-// ─────────────────────────────────────────────
-// Assets
-// ─────────────────────────────────────────────
-add_action( 'wp_enqueue_scripts', 'rustica_enqueue_assets' );
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
-function rustica_enqueue_assets() {
-	wp_enqueue_style( 'rustica-fonts',
-		'https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:wght@300;400;600&display=swap',
-		array(), null );
+// ─────────────────────────────────────────────────────────────────────────────
+// Theme setup
+// ─────────────────────────────────────────────────────────────────────────────
+add_action( 'after_setup_theme', function () {
+	add_theme_support( 'woocommerce' );
+	add_theme_support( 'wc-product-gallery-zoom' );
+	add_theme_support( 'wc-product-gallery-lightbox' );
+	add_theme_support( 'wp-block-styles' );
+	add_theme_support( 'editor-styles' );
+	add_editor_style( 'assets/css/main.css' );
+	add_theme_support( 'post-thumbnails' );
+	add_image_size( 'rustica-hero', 1920, 800, true );
+	add_image_size( 'rustica-card', 600, 400, true );
+	register_nav_menus( [
+		'primary' => 'Menú Principal',
+		'footer'  => 'Menú Footer',
+	] );
+	add_theme_support( 'title-tag' );
+} );
 
-	wp_enqueue_style( 'bootstrap',
+// ─────────────────────────────────────────────────────────────────────────────
+// Enqueue assets
+// ─────────────────────────────────────────────────────────────────────────────
+add_action( 'wp_enqueue_scripts', function () {
+	wp_enqueue_style(
+		'bootstrap',
 		'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css',
-		array(), '5.3.3' );
-
-	wp_enqueue_style( 'fontawesome',
-		'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css',
-		array(), '6.5.2' );
-
-	wp_enqueue_style( 'rustica-main',
-		get_stylesheet_directory_uri() . '/css/main.css',
-		array( 'bootstrap', 'fontawesome', 'rustica-fonts' ), '1.1.0' );
-
-	wp_enqueue_script( 'bootstrap-js',
+		[],
+		'5.3.3'
+	);
+	wp_enqueue_style(
+		'rustica-main',
+		get_template_directory_uri() . '/assets/css/main.css',
+		[ 'bootstrap' ],
+		wp_get_theme()->get( 'Version' )
+	);
+	wp_enqueue_script(
+		'bootstrap',
 		'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js',
-		array(), '5.3.3', true );
-
-	wp_enqueue_script( 'rustica-main-js',
-		get_stylesheet_directory_uri() . '/dist/js/main.js',
-		array( 'bootstrap-js' ), '1.0.0', true );
-
-	add_filter( 'script_loader_tag', 'rustica_add_module_type', 10, 3 );
-
-	// CSS dinámico desde Customizer (colores de marca)
-	wp_add_inline_style( 'rustica-main', rustica_customizer_css() );
-}
-
-function rustica_add_module_type( $tag, $handle, $src ) {
-	if ( 'rustica-main-js' === $handle ) {
-		return '<script type="module" src="' . esc_url( $src ) . '"></script>' . "\n";
-	}
-	return $tag;
-}
-
-// ─────────────────────────────────────────────
-// CSS dinámico desde Customizer
-// ─────────────────────────────────────────────
-function rustica_customizer_css() {
-	$siena = get_theme_mod( 'rustica_color_siena', '#A0522D' );
-	$olive = get_theme_mod( 'rustica_color_olive', '#6B7A4F' );
-
-	// Derivar dark (oscurecer ~20%) de forma simple
-	return "
-		:root {
-			--rustica-siena: {$siena};
-			--rustica-accent: {$siena};
-			--rustica-olive: {$olive};
-			--rustica-secondary: {$olive};
-		}
-	";
-}
-
-// ─────────────────────────────────────────────
-// Customizer
-// ─────────────────────────────────────────────
-add_action( 'customize_register', 'rustica_customize_register' );
-
-function rustica_customize_register( WP_Customize_Manager $wp_customize ) {
-
-	// ── Panel principal ──────────────────────
-	$wp_customize->add_panel( 'rustica_panel', array(
-		'title'    => '🍽 Rústica — Contenido',
-		'priority' => 30,
-	) );
-
-	// ── SECCIÓN: Hero ────────────────────────
-	$wp_customize->add_section( 'rustica_hero', array(
-		'title' => 'Hero (portada)',
-		'panel' => 'rustica_panel',
-	) );
-
-	rustica_add_setting( $wp_customize, 'hero_image', '',
-		'Imagen de fondo', 'rustica_hero', 'image' );
-
-	rustica_add_setting( $wp_customize, 'hero_title', 'Sabores de nuestra tierra',
-		'Título principal', 'rustica_hero', 'text' );
-
-	rustica_add_setting( $wp_customize, 'hero_subtitle',
-		'La tradición y la calidez de la cocina latinoamericana al fuego de la leña. Reserva tu mesa y déjate llevar.',
-		'Subtítulo', 'rustica_hero', 'textarea' );
-
-	rustica_add_setting( $wp_customize, 'hero_cta', 'Reserva una Mesa',
-		'Texto del botón CTA', 'rustica_hero', 'text' );
-
-	// ── SECCIÓN: Menú (4 platos) ─────────────
-	$wp_customize->add_section( 'rustica_menu', array(
-		'title' => 'Menú — Platos destacados',
-		'panel' => 'rustica_panel',
-	) );
-
-	$platos_defaults = array(
-		1 => array( 'name' => 'Lomo Saltado',      'desc' => 'Tiras de res al wok con cebolla, tomate, ají amarillo, servido con papas fritas y arroz.',        'price' => '22,00 €', 'badge' => 'Especialidad' ),
-		2 => array( 'name' => 'Ceviche Clásico', 'desc' => 'Pescado blanco marinado en leche de tigre con cebolla morada, camote y choclo.',                'price' => '15,00 €', 'badge' => 'Recomendado' ),
-		3 => array( 'name' => 'Arepa Reina Pepiada',             'desc' => 'Arepa de maíz rellena de ensalada de pollo desmechado y aguacate cremoso.', 'price' => '9,00 €', 'badge' => 'Recomendado' ),
-		4 => array( 'name' => 'Tres Leches Tres Sabores',      'desc' => 'Bizcocho tradicional bañado en tres leches con un toque de canela y merengue.',           'price' => '8,50 €',  'badge' => '' ),
+		[],
+		'5.3.3',
+		true
 	);
-
-	foreach ( $platos_defaults as $n => $p ) {
-		rustica_add_setting( $wp_customize, "dish_{$n}_name",  $p['name'],  "Plato {$n} — Nombre",       'rustica_menu', 'text' );
-		rustica_add_setting( $wp_customize, "dish_{$n}_desc",  $p['desc'],  "Plato {$n} — Descripción",  'rustica_menu', 'textarea' );
-		rustica_add_setting( $wp_customize, "dish_{$n}_price", $p['price'], "Plato {$n} — Precio",       'rustica_menu', 'text' );
-		rustica_add_setting( $wp_customize, "dish_{$n}_badge", $p['badge'], "Plato {$n} — Etiqueta",     'rustica_menu', 'select',
-			array( '' => '(Sin etiqueta)', 'Especialidad' => 'Especialidad', 'Recomendado' => 'Recomendado' ) );
-		rustica_add_setting( $wp_customize, "dish_{$n}_image", '',          "Plato {$n} — Imagen",       'rustica_menu', 'image' );
-	}
-
-	// ── SECCIÓN: Contacto ────────────────────
-	$wp_customize->add_section( 'rustica_contact', array(
-		'title' => 'Contacto',
-		'panel' => 'rustica_panel',
-	) );
-
-	rustica_add_setting( $wp_customize, 'contact_address', 'Calle de la Tradición 123, 28010 Madrid, España',
-		'Dirección', 'rustica_contact', 'text' );
-
-	rustica_add_setting( $wp_customize, 'contact_phone', '+34 912 345 678',
-		'Teléfono', 'rustica_contact', 'text' );
-
-	rustica_add_setting( $wp_customize, 'contact_email', 'contacto@larusticamesa.com',
-		'Email', 'rustica_contact', 'text' );
-
-	rustica_add_setting( $wp_customize, 'contact_hours', 'Mar–Dom: 13:00–23:30 · Lunes cerrado',
-		'Horarios', 'rustica_contact', 'textarea' );
-
-	// ── SECCIÓN: Redes Sociales ──────────────
-	$wp_customize->add_section( 'rustica_social', array(
-		'title' => 'Redes Sociales',
-		'panel' => 'rustica_panel',
-	) );
-
-	rustica_add_setting( $wp_customize, 'social_instagram', '#', 'Instagram (URL)', 'rustica_social', 'url' );
-	rustica_add_setting( $wp_customize, 'social_facebook',  '#', 'Facebook (URL)',  'rustica_social', 'url' );
-	rustica_add_setting( $wp_customize, 'social_tripadvisor', '#', 'TripAdvisor (URL)', 'rustica_social', 'url' );
-
-	// ── SECCIÓN: Colores de marca ────────────
-	$wp_customize->add_section( 'rustica_colors', array(
-		'title' => 'Colores de marca',
-		'panel' => 'rustica_panel',
-	) );
-
-	$wp_customize->add_setting( 'rustica_color_siena', array(
-		'default'           => '#A0522D',
-		'sanitize_callback' => 'sanitize_hex_color',
-		'transport'         => 'postMessage',
-	) );
-	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'rustica_color_siena', array(
-		'label'   => 'Color principal (siena)',
-		'section' => 'rustica_colors',
-	) ) );
-
-	$wp_customize->add_setting( 'rustica_color_olive', array(
-		'default'           => '#6B7A4F',
-		'sanitize_callback' => 'sanitize_hex_color',
-		'transport'         => 'postMessage',
-	) );
-	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'rustica_color_olive', array(
-		'label'   => 'Color secundario (oliva)',
-		'section' => 'rustica_colors',
-	) ) );
-}
-
-// ─────────────────────────────────────────────
-// ACF — Campos de la landing page
-// ─────────────────────────────────────────────
-add_action( 'acf/init', 'rustica_register_acf_fields' );
-
-function rustica_register_acf_fields() {
-	if ( ! function_exists( 'acf_add_local_field_group' ) ) return;
-
-	// ── HERO ──────────────────────────────────
-	acf_add_local_field_group( array(
-		'key'      => 'group_rustica_hero',
-		'title'    => '🎯 Rústica — Hero',
-		'location' => array( array( array(
-			'param' => 'page_type', 'operator' => '==', 'value' => 'front_page',
-		) ) ),
-		'menu_order' => 0,
-		'fields' => array(
-			array( 'key' => 'field_hero_bg',       'label' => 'Imagen de fondo',  'name' => 'hero_bg',       'type' => 'image',    'return_format' => 'url', 'preview_size' => 'medium' ),
-			array( 'key' => 'field_hero_title',    'label' => 'Título',           'name' => 'hero_title',    'type' => 'text',     'default_value' => 'Sabores de nuestra tierra' ),
-			array( 'key' => 'field_hero_subtitle', 'label' => 'Subtítulo',        'name' => 'hero_subtitle', 'type' => 'textarea', 'default_value' => 'La tradición y la calidez de la cocina latinoamericana al fuego de la leña. Reserva tu mesa y déjate llevar.', 'rows' => 3 ),
-			array( 'key' => 'field_hero_cta',      'label' => 'Texto botón CTA',  'name' => 'hero_cta',      'type' => 'text',     'default_value' => 'Reserva una Mesa' ),
-		),
-	) );
-
-	// ── MENÚ — 4 platos ───────────────────────
-	$dish_fields = array();
-	$dishes = array(
-		1 => array( 'name' => 'Lomo Saltado',      'desc' => 'Tiras de res al wok con cebolla, tomate, ají amarillo, servido con papas fritas y arroz.',        'price' => '22,00 €', 'badge' => 'Especialidad' ),
-		2 => array( 'name' => 'Ceviche Clásico', 'desc' => 'Pescado blanco marinado en leche de tigre con cebolla morada, camote y choclo.',                'price' => '15,00 €', 'badge' => 'Recomendado' ),
-		3 => array( 'name' => 'Arepa Reina Pepiada',             'desc' => 'Arepa de maíz rellena de ensalada de pollo desmechado y aguacate cremoso.', 'price' => '9,00 €', 'badge' => 'Recomendado' ),
-		4 => array( 'name' => 'Tres Leches Tres Sabores',      'desc' => 'Bizcocho tradicional bañado en tres leches con un toque de canela y merengue.',           'price' => '8,50 €',  'badge' => '' ),
+	wp_enqueue_script(
+		'rustica-main',
+		get_template_directory_uri() . '/assets/js/main.js',
+		[ 'bootstrap' ],
+		wp_get_theme()->get( 'Version' ),
+		true
 	);
+} );
 
-	foreach ( $dishes as $n => $d ) {
-		$dish_fields[] = array( 'key' => "field_dish_{$n}_tab",   'label' => "Plato {$n}", 'name' => '', 'type' => 'tab' );
-		$dish_fields[] = array( 'key' => "field_dish_{$n}_name",  'label' => 'Nombre',     'name' => "dish_{$n}_name",  'type' => 'text',     'default_value' => $d['name'] );
-		$dish_fields[] = array( 'key' => "field_dish_{$n}_desc",  'label' => 'Descripción','name' => "dish_{$n}_desc",  'type' => 'textarea', 'default_value' => $d['desc'], 'rows' => 2 );
-		$dish_fields[] = array( 'key' => "field_dish_{$n}_price", 'label' => 'Precio',     'name' => "dish_{$n}_price", 'type' => 'text',     'default_value' => $d['price'] );
-		$dish_fields[] = array( 'key' => "field_dish_{$n}_badge", 'label' => 'Etiqueta',   'name' => "dish_{$n}_badge", 'type' => 'select',
-			'choices'       => array( '' => '(Sin etiqueta)', 'Especialidad' => 'Especialidad', 'Recomendado' => 'Recomendado' ),
-			'default_value' => $d['badge'],
-		);
-		$dish_fields[] = array( 'key' => "field_dish_{$n}_image", 'label' => 'Foto del plato', 'name' => "dish_{$n}_image", 'type' => 'image', 'return_format' => 'url', 'preview_size' => 'thumbnail' );
+// ─────────────────────────────────────────────────────────────────────────────
+// ACF Blocks registration
+// ─────────────────────────────────────────────────────────────────────────────
+add_action( 'init', function () {
+	if ( ! function_exists( 'acf_register_block_type' ) ) {
+		return;
 	}
-
-	acf_add_local_field_group( array(
-		'key'        => 'group_rustica_menu',
-		'title'      => '🍽 Rústica — Menú Destacado',
-		'location'   => array( array( array(
-			'param' => 'page_type', 'operator' => '==', 'value' => 'front_page',
-		) ) ),
-		'menu_order' => 10,
-		'fields'     => $dish_fields,
-	) );
-
-	// ── CONTACTO ──────────────────────────────
-	acf_add_local_field_group( array(
-		'key'        => 'group_rustica_contact',
-		'title'      => '📍 Rústica — Contacto',
-		'location'   => array( array( array(
-			'param' => 'page_type', 'operator' => '==', 'value' => 'front_page',
-		) ) ),
-		'menu_order' => 20,
-		'fields'     => array(
-			array( 'key' => 'field_contact_address', 'label' => 'Dirección', 'name' => 'contact_address', 'type' => 'text',     'default_value' => 'Calle de la Tradición 123, 28010 Madrid, España' ),
-			array( 'key' => 'field_contact_phone',   'label' => 'Teléfono',  'name' => 'contact_phone',   'type' => 'text',     'default_value' => '+34 912 345 678' ),
-			array( 'key' => 'field_contact_email',   'label' => 'Email',     'name' => 'contact_email',   'type' => 'email',    'default_value' => 'contacto@larusticamesa.com' ),
-			array( 'key' => 'field_contact_hours',   'label' => 'Horarios',  'name' => 'contact_hours',   'type' => 'textarea', 'default_value' => 'Mar–Dom: 13:00–23:30 · Lunes cerrado', 'rows' => 2 ),
-			array( 'key' => 'field_contact_map',     'label' => 'URL embed mapa (iframe src)', 'name' => 'contact_map', 'type' => 'url', 'default_value' => 'https://maps.google.com/maps?q=Madrid,Spain&output=embed' ),
-		),
-	) );
-
-	// ── REDES SOCIALES ────────────────────────
-	acf_add_local_field_group( array(
-		'key'        => 'group_rustica_social',
-		'title'      => '📱 Rústica — Redes Sociales',
-		'location'   => array( array( array(
-			'param' => 'page_type', 'operator' => '==', 'value' => 'front_page',
-		) ) ),
-		'menu_order' => 30,
-		'fields'     => array(
-			array( 'key' => 'field_social_instagram',   'label' => 'Instagram URL',   'name' => 'social_instagram',   'type' => 'url', 'default_value' => '#' ),
-			array( 'key' => 'field_social_facebook',    'label' => 'Facebook URL',    'name' => 'social_facebook',    'type' => 'url', 'default_value' => '#' ),
-			array( 'key' => 'field_social_tripadvisor', 'label' => 'TripAdvisor URL', 'name' => 'social_tripadvisor', 'type' => 'url', 'default_value' => '#' ),
-		),
-	) );
-}
-
-// Helper: lee campo ACF con fallback
-function rustica_field( string $name, string $default = '' ): string {
-	if ( ! function_exists( 'get_field' ) ) return esc_html( $default );
-	$val = get_field( $name );
-	return esc_html( $val ?: $default );
-}
-
-function rustica_field_url( string $name, string $default = '#' ): string {
-	if ( ! function_exists( 'get_field' ) ) return esc_url( $default );
-	$val = get_field( $name );
-	return esc_url( $val ?: $default );
-}
-
-// ─────────────────────────────────────────────
-// Helper: registra setting + control de una vez
-// ─────────────────────────────────────────────
-function rustica_add_setting( $wp_customize, $id, $default, $label, $section, $type, $choices = array() ) {
-	$sanitize = match( $type ) {
-		'url'      => 'esc_url_raw',
-		'textarea' => 'sanitize_textarea_field',
-		'image'    => 'esc_url_raw',
-		'select'   => 'sanitize_text_field',
-		default    => 'sanitize_text_field',
-	};
-
-	$wp_customize->add_setting( "rustica_{$id}", array(
-		'default'           => $default,
-		'sanitize_callback' => $sanitize,
-		'transport'         => 'refresh',
-	) );
-
-	if ( $type === 'image' ) {
-		$wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, "rustica_{$id}", array(
-			'label'   => $label,
-			'section' => $section,
-		) ) );
-	} elseif ( $type === 'select' ) {
-		$wp_customize->add_control( "rustica_{$id}", array(
-			'label'   => $label,
-			'section' => $section,
-			'type'    => 'select',
-			'choices' => $choices,
-		) );
-	} else {
-		$wp_customize->add_control( "rustica_{$id}", array(
-			'label'   => $label,
-			'section' => $section,
-			'type'    => $type,
-		) );
+	foreach ( [ 'hero', 'menu-showcase', 'gallery-section', 'reservation-cta' ] as $block ) {
+		register_block_type( get_template_directory() . "/blocks/{$block}" );
 	}
-}
+} );

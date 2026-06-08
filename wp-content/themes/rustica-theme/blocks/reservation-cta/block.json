@@ -1,0 +1,7 @@
+{
+    "name": "rustica/reservation-cta",
+    "title": "Reservación CTA",
+    "category": "rustica",
+    "icon": "calendar-alt",
+    "acf": { "mode": "edit", "renderTemplate": "render.php" }
+}

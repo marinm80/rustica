@@ -1,0 +1,7 @@
+{
+    "name": "rustica/gallery-section",
+    "title": "Galería",
+    "category": "rustica",
+    "icon": "format-gallery",
+    "acf": { "mode": "edit", "renderTemplate": "render.php" }
+}

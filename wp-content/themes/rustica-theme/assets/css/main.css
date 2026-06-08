@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+    --rustica-negro:  #1a1a1a;
+    --rustica-oro:    #c9a84c;
+    --rustica-crema:  #f5f0e8;
+    --rustica-blanco: #ffffff;
+}
+
+body { font-family: 'Inter', sans-serif; }
+h1, h2, h3 { font-family: 'Playfair Display', serif; }
+
+/* Hero */
+.rustica-hero {
+    position: relative;
+    min-height: 90vh;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.rustica-hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(26, 26, 26, 0.55);
+}
+.rustica-hero__content { position: relative; z-index: 1; }
+
+/* Navbar */
+.navbar-brand { font-family: 'Playfair Display', serif; font-size: 1.4rem; }
+.nav-link { color: #f5f0e8 !important; transition: color .2s; }
+.nav-link:hover { color: #c9a84c !important; }
+
+/* Cards */
+.card { border-radius: .75rem; transition: transform .2s, box-shadow .2s; }
+.card:hover { transform: translateY(-4px); box-shadow: 0 .75rem 1.5rem rgba(0, 0, 0, .12) !important; }
+
+/* Botones marca */
+.btn-rustica {
+    background-color: var(--rustica-oro);
+    border-color: var(--rustica-oro);
+    color: var(--rustica-negro);
+    font-weight: 600;
+}
+.btn-rustica:hover { background-color: #b8962e; border-color: #b8962e; color: #fff; }
+
+/* Kitchen display */
+.kitchen-display { min-height: 100vh; background: #1a1a1a; color: #f5f0e8; padding: 1rem; }
+.kitchen-display header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid #c9a84c;
+    padding-bottom: .75rem;
+}
+.kitchen-display h1 { font-family: 'Playfair Display', serif; color: #c9a84c; margin: 0; }
+.comandas-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
+.comanda-card {
+    background: #2a2a2a;
+    border-radius: .75rem;
+    padding: 1rem;
+    border-left: 4px solid #c9a84c;
+}
+.comanda-card.nueva { border-left-color: #28a745; animation: pulse 1s ease-in-out 3; }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .6; } }
