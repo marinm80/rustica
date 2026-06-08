@@ -38,6 +38,13 @@ class Rustica_API {
 			'permission_callback' => '__return_true',
 		] );
 
+		// Endpoint público: conteo de mesas libres por zona — usado por ZonasApp en el landing.
+		register_rest_route( $ns, '/zonas', [
+			'methods'             => 'GET',
+			'callback'            => [ self::class, 'get_zonas_disponibles' ],
+			'permission_callback' => '__return_true',
+		] );
+
 		register_rest_route( $ns, '/reservacion', [
 			'methods'             => 'POST',
 			'callback'            => [ self::class, 'crear_reservacion' ],
@@ -576,5 +583,73 @@ class Rustica_API {
 		update_post_meta( $mesa_id, 'estado', 'libre' );
 
 		return new WP_REST_Response( [ 'ok' => true, 'mesa_id' => $mesa_id, 'estado' => 'libre' ], 200 );
+	}
+
+	/**
+	 * GET /zonas — Devuelve cada zona con el conteo de mesas en estado "libre".
+	 *
+	 * Endpoint público usado por ZonasApp en el landing para mostrar disponibilidad
+	 * en tiempo real sin recargar la página.
+	 *
+	 * @since  1.0.0
+	 * @return WP_REST_Response
+	 */
+	public static function get_zonas_disponibles(): WP_REST_Response {
+		$definicion = [
+			'salon-principal' => [
+				'nombre' => 'Salón Principal',
+				'desc'   => 'Mesas para grupos desde 2 personas. El corazón del restaurante.',
+			],
+			'la-terrazza'     => [
+				'nombre' => 'La Terrazza',
+				'desc'   => 'Mesas al aire libre con vista panorámica. Para disfrutar el ambiente.',
+			],
+			'zona-vip'        => [
+				'nombre' => 'Zona VIP',
+				'desc'   => 'Mesas privadas con consumo mínimo. Para experiencias exclusivas.',
+			],
+		];
+
+		$resultado = [];
+
+		foreach ( $definicion as $slug => $info ) {
+			// Total de mesas en la zona.
+			$q_total = new WP_Query( [
+				'post_type'      => 'mesa',
+				'posts_per_page' => -1,
+				'fields'         => 'ids',
+				'tax_query'      => [ [
+					'taxonomy' => 'zona_restaurante',
+					'field'    => 'slug',
+					'terms'    => $slug,
+				] ],
+			] );
+
+			// Mesas actualmente libres (sin reserva activa ni ocupadas).
+			$q_libres = new WP_Query( [
+				'post_type'      => 'mesa',
+				'posts_per_page' => -1,
+				'fields'         => 'ids',
+				'tax_query'      => [ [
+					'taxonomy' => 'zona_restaurante',
+					'field'    => 'slug',
+					'terms'    => $slug,
+				] ],
+				'meta_query'     => [ [
+					'key'   => 'estado',
+					'value' => 'libre',
+				] ],
+			] );
+
+			$resultado[] = [
+				'slug'         => $slug,
+				'nombre'       => $info['nombre'],
+				'desc'         => $info['desc'],
+				'total_mesas'  => $q_total->found_posts,
+				'mesas_libres' => $q_libres->found_posts,
+			];
+		}
+
+		return new WP_REST_Response( [ 'zonas' => $resultado ], 200 );
 	}
 }

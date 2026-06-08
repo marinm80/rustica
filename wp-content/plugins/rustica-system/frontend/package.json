@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "vite",
-    "build": "vite build --config vite.mesero.js && vite build --config vite.cocina.js && vite build",
+    "build": "vite build --config vite.mesero.js && vite build --config vite.cocina.js && vite build --config vite.zonas.js && vite build",
     "preview": "vite preview"
   },
   "dependencies": {

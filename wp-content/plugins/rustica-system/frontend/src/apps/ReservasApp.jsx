@@ -64,6 +64,9 @@ export default function ReservasApp() {
     setResultado(data)
     setStep('confirmacion')
     setLoading(false)
+
+    // Notifica a ZonasApp para que refresque el conteo de mesas libres
+    document.dispatchEvent(new CustomEvent('rustica:reservacion_completada'))
   }
 
   const resetear = () => {

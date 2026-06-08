@@ -166,115 +166,19 @@ get_header(); ?>
     </div>
 </section>
 
-<!-- ZONAS DEL RESTAURANTE -->
+<!-- ZONAS DEL RESTAURANTE — renderizado por ZonasApp (React) para conteo en tiempo real -->
 <section class="py-5" style="background:#1a1a1a;">
     <div class="container">
         <div class="text-center mb-5">
             <p class="text-uppercase mb-2" style="color:#c9a84c;letter-spacing:.15em;font-size:.8rem;">Nuestros espacios</p>
             <h2 style="font-family:'Playfair Display',serif;color:#fff;">Elige tu ambiente</h2>
-            <p style="color:#aaa;max-width:500px;margin:.5rem auto 0;">Haz clic en la zona que prefieras para reservar tu mesa directamente.</p>
+            <p style="color:#aaa;max-width:500px;margin:.5rem auto 0;">
+                Haz clic en la zona que prefieras para reservar tu mesa directamente.
+            </p>
         </div>
-        <div class="row g-4">
-            <?php
-            $zonas_config = [
-                'salon-principal' => [
-                    'nombre' => 'Salón Principal',
-                    'desc'   => 'Mesas para grupos desde 2 personas. El corazón del restaurante.',
-                ],
-                'la-terrazza' => [
-                    'nombre' => 'La Terrazza',
-                    'desc'   => 'Mesas al aire libre con vista panorámica. Para disfrutar el ambiente.',
-                ],
-                'zona-vip' => [
-                    'nombre' => 'Zona VIP',
-                    'desc'   => 'Mesas privadas con consumo mínimo. Para experiencias exclusivas.',
-                ],
-            ];
-
-            foreach ($zonas_config as $slug => $cfg) :
-                // Contar mesas libres en esta zona
-                $q_libre = new WP_Query([
-                    'post_type'      => 'mesa',
-                    'posts_per_page' => -1,
-                    'fields'         => 'ids',
-                    'tax_query'      => [[
-                        'taxonomy' => 'zona_restaurante',
-                        'field'    => 'slug',
-                        'terms'    => $slug,
-                    ]],
-                    'meta_query' => [[
-                        'key'     => 'estado',
-                        'value'   => 'libre',
-                    ]],
-                ]);
-                $total_libre = $q_libre->found_posts;
-                $sin_mesas   = $total_libre === 0;
-            ?>
-            <div class="col-md-4">
-                <div
-                    class="rustica-zona-card p-4 h-100"
-                    data-zona="<?php echo esc_attr($slug); ?>"
-                    style="
-                        border: 1px solid <?php echo $sin_mesas ? '#555' : '#c9a84c44'; ?>;
-                        border-radius: .75rem;
-                        cursor: <?php echo $sin_mesas ? 'not-allowed' : 'pointer'; ?>;
-                        opacity: <?php echo $sin_mesas ? '.5' : '1'; ?>;
-                        transition: border-color .2s, transform .2s, box-shadow .2s;
-                        position: relative;
-                    "
-                >
-                    <?php if (!$sin_mesas) : ?>
-                    <span style="
-                        position:absolute;top:12px;right:14px;
-                        background:#c9a84c;color:#1a1a1a;
-                        font-size:11px;font-weight:700;
-                        padding:3px 10px;border-radius:20px;
-                    ">Reservar →</span>
-                    <?php endif; ?>
-
-                    <h4 style="color:#c9a84c;font-family:'Playfair Display',serif;" class="mb-2">
-                        <?php echo esc_html($cfg['nombre']); ?>
-                    </h4>
-                    <p style="color:#aaa;" class="small mb-3"><?php echo esc_html($cfg['desc']); ?></p>
-
-                    <?php if ($sin_mesas) : ?>
-                        <p class="mb-0 small" style="color:#e74c3c;font-weight:600;">
-                            Sin mesas disponibles por el momento
-                        </p>
-                    <?php else : ?>
-                        <p class="mb-0 small" style="color:#c9a84c;">
-                            <?php echo $total_libre; ?> mesa<?php echo $total_libre !== 1 ? 's' : ''; ?> disponible<?php echo $total_libre !== 1 ? 's' : ''; ?>
-                        </p>
-                    <?php endif; ?>
-                </div>
-            </div>
-            <?php endforeach; ?>
-        </div>
+        <?php echo do_shortcode('[rustica_zonas]'); ?>
     </div>
 </section>
-
-<script>
-document.querySelectorAll('.rustica-zona-card').forEach(function(card) {
-    if (card.style.cursor === 'not-allowed') return;
-    card.addEventListener('mouseenter', function() {
-        this.style.borderColor  = '#c9a84c';
-        this.style.transform    = 'translateY(-4px)';
-        this.style.boxShadow    = '0 8px 24px rgba(201,168,76,.2)';
-    });
-    card.addEventListener('mouseleave', function() {
-        this.style.borderColor  = 'rgba(201,168,76,.27)';
-        this.style.transform    = 'translateY(0)';
-        this.style.boxShadow    = 'none';
-    });
-    card.addEventListener('click', function() {
-        var zona = this.dataset.zona;
-        window.RusticaZonaPreseleccionada = zona;
-        document.dispatchEvent(new CustomEvent('rustica:zona', { detail: { zona: zona } }));
-        var target = document.getElementById('reservas');
-        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-});
-</script>
 
 <!-- RESERVA -->
 <section id="reservas" class="py-5" style="background:#f5f0e8;">

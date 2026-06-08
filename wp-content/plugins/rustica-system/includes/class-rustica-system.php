@@ -26,9 +26,10 @@ class Rustica_System {
     private function __construct() {
         add_action("rest_api_init",       ["Rustica_API",      "register_routes"]);
         add_action("wp_enqueue_scripts",  [$this,              "enqueue_apps"]);
-        add_shortcode("rustica_mesero",   [$this,              "shortcode_mesero"]);
-        add_shortcode("rustica_cocina",   [$this,              "shortcode_cocina"]);
+        add_shortcode("rustica_mesero",   [$this, "shortcode_mesero"]);
+        add_shortcode("rustica_cocina",   [$this, "shortcode_cocina"]);
         add_shortcode("rustica_reservas", [$this, "shortcode_reservas"]);
+        add_shortcode("rustica_zonas",    [$this, "shortcode_zonas"]);
         add_action("woocommerce_order_status_completed", 
                     ["Rustica_Billing", "on_pago_completado"], 10, 1);
         add_action("rustica_cron_cleanup", 
@@ -105,7 +106,7 @@ class Rustica_System {
         $dist = RUSTICA_URL . 'assets/dist/';
         $ver  = RUSTICA_VERSION;
 
-        foreach ( ['mesero', 'cocina', 'reservas'] as $app ) {
+        foreach ( ['mesero', 'cocina', 'reservas', 'zonas'] as $app ) {
             $file = RUSTICA_PATH . "assets/dist/{$app}.js";
             if ( file_exists( $file ) ) {
                 wp_register_script(
@@ -149,6 +150,15 @@ class Rustica_System {
     public function shortcode_reservas() {
         wp_enqueue_script( 'rustica-reservas' );
         return '<div id="rustica-reservas"></div>';
+    }
+
+    /**
+     * Monta ZonasApp: tarjetas de zona con conteo de mesas libres en tiempo real.
+     * Se actualiza vía evento DOM rustica:reservacion_completada sin recargar la página.
+     */
+    public function shortcode_zonas() {
+        wp_enqueue_script( 'rustica-zonas' );
+        return '<div id="rustica-zonas"></div>';
     }
 
     /**
