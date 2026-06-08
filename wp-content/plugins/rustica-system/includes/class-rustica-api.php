@@ -104,6 +104,20 @@ class Rustica_API {
 			'callback'            => [ self::class, 'cerrar_cuenta' ],
 			'permission_callback' => [ self::class, 'verificar_jwt' ],
 		] );
+
+		// Reemplaza los items de una comanda abierta (para editar cantidades o eliminar desde el tablet del mesero).
+		register_rest_route( $ns, '/comanda/actualizar-items', [
+			'methods'             => 'POST',
+			'callback'            => [ self::class, 'actualizar_items' ],
+			'permission_callback' => [ self::class, 'verificar_jwt' ],
+		] );
+
+		// Menú público agrupado por categoría WooCommerce — usado por MeseroApp y la carta.
+		register_rest_route( $ns, '/menu', [
+			'methods'             => 'GET',
+			'callback'            => [ self::class, 'get_menu' ],
+			'permission_callback' => '__return_true',
+		] );
 	}
 
 	/**
@@ -651,5 +665,104 @@ class Rustica_API {
 		}
 
 		return new WP_REST_Response( [ 'zonas' => $resultado ], 200 );
+	}
+
+	/**
+	 * POST /comanda/actualizar-items — Reemplaza el array de items de una comanda abierta.
+	 *
+	 * Permite al mesero modificar cantidades, eliminar items o agregar nuevos
+	 * antes de enviar la comanda a cocina. No opera sobre comandas en_cocina o cerradas.
+	 *
+	 * @since  1.0.0
+	 * @param  WP_REST_Request $req { comanda_id: int, items: array }
+	 * @return WP_REST_Response|WP_Error
+	 */
+	public static function actualizar_items( WP_REST_Request $req ): WP_REST_Response|WP_Error {
+		$comanda_id = (int) $req->get_param( 'comanda_id' );
+		$items_raw  = $req->get_param( 'items' );
+
+		if ( ! $comanda_id || ! is_array( $items_raw ) ) {
+			return new WP_Error( 'datos_invalidos', 'Se requiere comanda_id e items[]', [ 'status' => 400 ] );
+		}
+
+		$estado = get_post_meta( $comanda_id, 'estado', true );
+		if ( ! in_array( $estado, [ 'abierta', '' ], true ) ) {
+			return new WP_Error( 'comanda_no_editable', 'Solo se pueden editar comandas abiertas', [ 'status' => 409 ] );
+		}
+
+		// Recalcular subtotales para garantizar coherencia con el precio real del producto.
+		$items_limpios = [];
+		foreach ( $items_raw as $item ) {
+			$producto  = wc_get_product( (int) ( $item['producto_id'] ?? 0 ) );
+			$cantidad  = max( 1, (int) ( $item['cantidad'] ?? 1 ) );
+			$precio    = $producto ? (float) $producto->get_price() : (float) ( $item['precio'] ?? 0 );
+			$items_limpios[] = [
+				'producto_id'   => (int) ( $item['producto_id'] ?? 0 ),
+				'nombre'        => $producto ? $producto->get_name() : ( $item['nombre'] ?? '' ),
+				'precio'        => $precio,
+				'cantidad'      => $cantidad,
+				'subtotal'      => round( $precio * $cantidad, 2 ),
+				'modificadores' => $item['modificadores'] ?? [],
+				'notas'         => sanitize_text_field( $item['notas'] ?? '' ),
+				'estado'        => 'pendiente',
+			];
+		}
+
+		update_post_meta( $comanda_id, 'items', $items_limpios );
+
+		$total = array_sum( array_column( $items_limpios, 'subtotal' ) );
+
+		return new WP_REST_Response( [
+			'ok'         => true,
+			'comanda_id' => $comanda_id,
+			'items'      => count( $items_limpios ),
+			'total'      => $total,
+		], 200 );
+	}
+
+	/**
+	 * GET /menu — Menú completo agrupado por categoría WooCommerce.
+	 *
+	 * Incluye precio, descripción y tiempo de preparación de cada platillo.
+	 * Usado por MeseroApp (tablet del mesero) y la página pública Nuestra Carta.
+	 *
+	 * @since  1.0.0
+	 * @return WP_REST_Response
+	 */
+	public static function get_menu(): WP_REST_Response {
+		$categorias = get_terms( [ 'taxonomy' => 'product_cat', 'hide_empty' => true ] );
+		$menu       = [];
+
+		foreach ( $categorias as $cat ) {
+			$productos = wc_get_products( [
+				'category' => [ $cat->slug ],
+				'status'   => 'publish',
+				'limit'    => -1,
+			] );
+
+			if ( empty( $productos ) ) continue;
+
+			$items = array_map( function ( $p ) {
+				$img = $p->get_image_id()
+					? wp_get_attachment_image_url( $p->get_image_id(), 'rustica-card' )
+					: null;
+				return [
+					'id'          => $p->get_id(),
+					'nombre'      => $p->get_name(),
+					'desc'        => $p->get_short_description(),
+					'precio'      => (float) $p->get_price(),
+					'imagen'      => $img,
+					'tiempo_prep' => (int) get_post_meta( $p->get_id(), 'tiempo_prep_min', true ),
+				];
+			}, $productos );
+
+			$menu[] = [
+				'categoria' => $cat->name,
+				'slug'      => $cat->slug,
+				'items'     => $items,
+			];
+		}
+
+		return new WP_REST_Response( [ 'menu' => $menu ], 200 );
 	}
 }

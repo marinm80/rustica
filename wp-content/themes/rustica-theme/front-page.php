@@ -166,32 +166,240 @@ get_header(); ?>
     </div>
 </section>
 
-<!-- ZONAS DEL RESTAURANTE — renderizado por ZonasApp (React) para conteo en tiempo real -->
-<section class="py-5" style="background:#1a1a1a;">
+<!-- ZONAS DEL RESTAURANTE — tarjetas PHP con conteo real + botón Reservar -->
+<section id="zonas" class="py-5" style="background:#1a1a1a;">
     <div class="container">
         <div class="text-center mb-5">
             <p class="text-uppercase mb-2" style="color:#c9a84c;letter-spacing:.15em;font-size:.8rem;">Nuestros espacios</p>
             <h2 style="font-family:'Playfair Display',serif;color:#fff;">Elige tu ambiente</h2>
-            <p style="color:#aaa;max-width:500px;margin:.5rem auto 0;">
-                Haz clic en la zona que prefieras para reservar tu mesa directamente.
-            </p>
         </div>
-        <?php echo do_shortcode('[rustica_zonas]'); ?>
+
+        <div class="row g-4 justify-content-center">
+        <?php
+        $zonas_def = [
+            'salon-principal' => ['nombre' => 'Salón Principal', 'desc' => 'Mesas para grupos desde 2 personas. El corazón del restaurante.'],
+            'la-terrazza'     => ['nombre' => 'La Terrazza',     'desc' => 'Mesas al aire libre con vista panorámica. Ambiente único.'],
+            'zona-vip'        => ['nombre' => 'Zona VIP',        'desc' => 'Mesas privadas con consumo mínimo. Para ocasiones especiales.'],
+        ];
+        foreach ($zonas_def as $slug => $z) :
+            $q = new WP_Query([
+                'post_type' => 'mesa', 'posts_per_page' => -1, 'fields' => 'ids',
+                'tax_query' => [['taxonomy' => 'zona_restaurante', 'field' => 'slug', 'terms' => $slug]],
+            ]);
+            $total = $q->found_posts;
+            $ql = new WP_Query([
+                'post_type' => 'mesa', 'posts_per_page' => -1, 'fields' => 'ids',
+                'tax_query' => [['taxonomy' => 'zona_restaurante', 'field' => 'slug', 'terms' => $slug]],
+                'meta_query' => [['key' => 'estado', 'value' => 'libre']],
+            ]);
+            $libres = $ql->found_posts;
+            $sin_mesas = $libres === 0;
+        ?>
+        <div class="col-md-4">
+            <div style="border:1px solid <?php echo $sin_mesas ? '#444' : 'rgba(201,168,76,.35)'; ?>;border-radius:14px;padding:28px;height:100%;opacity:<?php echo $sin_mesas ? '.55' : '1'; ?>;">
+                <h4 style="color:#c9a84c;font-family:'Playfair Display',serif;margin-bottom:8px;">
+                    <?php echo esc_html($z['nombre']); ?>
+                </h4>
+                <p style="color:#aaa;font-size:14px;margin-bottom:20px;">
+                    <?php echo esc_html($z['desc']); ?>
+                </p>
+
+                <!-- Barra de disponibilidad -->
+                <div style="margin-bottom:20px;">
+                    <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+                        <span style="font-size:12px;color:#888;">Mesas disponibles</span>
+                        <span style="font-size:13px;font-weight:700;color:<?php echo $sin_mesas ? '#e74c3c' : '#c9a84c'; ?>;">
+                            <?php echo $sin_mesas ? 'Sin disponibilidad' : "$libres / $total"; ?>
+                        </span>
+                    </div>
+                    <div style="height:4px;background:#333;border-radius:2px;">
+                        <div style="height:100%;width:<?php echo $total > 0 ? round(($libres/$total)*100) : 0; ?>%;background:<?php echo $sin_mesas ? '#e74c3c' : '#c9a84c'; ?>;border-radius:2px;"></div>
+                    </div>
+                </div>
+
+                <?php if (!$sin_mesas) : ?>
+                <button
+                    class="btn-reservar-zona"
+                    data-zona="<?php echo esc_attr($slug); ?>"
+                    data-nombre="<?php echo esc_attr($z['nombre']); ?>"
+                    data-bs-toggle="modal"
+                    data-bs-target="#modalReserva"
+                    style="width:100%;padding:12px;background:#c9a84c;color:#1a1a1a;border:none;border-radius:8px;font-weight:700;font-size:15px;cursor:pointer;">
+                    Reservar en <?php echo esc_html($z['nombre']); ?>
+                </button>
+                <?php else : ?>
+                <p style="text-align:center;color:#e74c3c;font-size:13px;font-weight:600;margin:0;">
+                    No hay mesas disponibles por el momento
+                </p>
+                <?php endif; ?>
+            </div>
+        </div>
+        <?php endforeach; ?>
+        </div>
     </div>
 </section>
 
-<!-- RESERVA -->
-<section id="reservas" class="py-5" style="background:#f5f0e8;">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-7 text-center">
-                <p class="text-uppercase mb-2" style="color:#c9a84c;letter-spacing:.15em;font-size:.8rem;">¿Listo para visitarnos?</p>
-                <h2 style="font-family:'Playfair Display',serif;color:#1a1a1a;" class="mb-3">Reserva tu mesa</h2>
-                <p class="text-muted mb-4">Reserva en línea en menos de 2 minutos. Confirmación inmediata por correo.</p>
-                <?php echo do_shortcode('[rustica_reservas]'); ?>
+<!-- MODAL DE RESERVA -->
+<div class="modal fade" id="modalReserva" tabindex="-1" aria-labelledby="modalReservaLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="border-radius:16px;border:none;overflow:hidden;">
+            <div class="modal-header" style="background:#1a1a1a;border:none;padding:20px 24px;">
+                <h5 class="modal-title" id="modalReservaLabel" style="color:#c9a84c;font-family:'Playfair Display',serif;">
+                    Reservar mesa
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body" style="padding:28px;">
+
+                <!-- Estado: formulario -->
+                <div id="reservaForm">
+                    <p id="reservaZonaLabel" style="font-size:13px;color:#888;margin-bottom:20px;"></p>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Nombre completo</label>
+                        <input type="text" id="rNombre" class="form-control" placeholder="Tu nombre" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Teléfono</label>
+                        <input type="tel" id="rTelefono" class="form-control" placeholder="+57 300 000 0000" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Correo electrónico</label>
+                        <input type="email" id="rEmail" class="form-control" placeholder="correo@ejemplo.com" required>
+                    </div>
+                    <div class="row g-2 mb-3">
+                        <div class="col-6">
+                            <label class="form-label fw-semibold">Fecha</label>
+                            <input type="date" id="rFecha" class="form-control" required>
+                        </div>
+                        <div class="col-6">
+                            <label class="form-label fw-semibold">Hora</label>
+                            <select id="rHora" class="form-select">
+                                <option value="">Selecciona</option>
+                                <?php foreach (['12:00','13:00','14:00','15:00','19:00','20:00','21:00','22:00'] as $h) : ?>
+                                    <option value="<?php echo $h; ?>"><?php echo $h; ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Número de personas</label>
+                        <select id="rPersonas" class="form-select">
+                            <?php for ($i=1;$i<=8;$i++) echo "<option value='$i'>$i persona".($i>1?'s':'')."</option>"; ?>
+                        </select>
+                    </div>
+
+                    <div id="reservaError" class="alert alert-danger d-none" role="alert"></div>
+
+                    <button id="btnConfirmarReserva"
+                        style="width:100%;padding:14px;background:#c9a84c;color:#1a1a1a;border:none;border-radius:8px;font-weight:700;font-size:16px;cursor:pointer;">
+                        Confirmar reserva
+                    </button>
+                </div>
+
+                <!-- Estado: éxito -->
+                <div id="reservaExito" class="d-none text-center py-3">
+                    <div style="font-size:48px;margin-bottom:12px;">✓</div>
+                    <h5 style="color:#28a745;font-family:'Playfair Display',serif;">¡Reserva confirmada!</h5>
+                    <p class="text-muted" id="reservaExitoMsg"></p>
+                    <button class="btn btn-outline-secondary btn-sm mt-2" data-bs-dismiss="modal">Cerrar</button>
+                </div>
             </div>
         </div>
     </div>
-</section>
+</div>
+
+<script>
+(function () {
+    var zonaSeleccionada = '';
+
+    // Al abrir el modal, captura la zona del botón que lo disparó
+    document.getElementById('modalReserva').addEventListener('show.bs.modal', function (e) {
+        var btn = e.relatedTarget;
+        if (!btn) return;
+        zonaSeleccionada = btn.dataset.zona || '';
+        var nombreZona   = btn.dataset.nombre || '';
+        document.getElementById('reservaZonaLabel').textContent =
+            nombreZona ? 'Zona seleccionada: ' + nombreZona : '';
+        // Resetear formulario al abrir
+        document.getElementById('reservaForm').classList.remove('d-none');
+        document.getElementById('reservaExito').classList.add('d-none');
+        document.getElementById('reservaError').classList.add('d-none');
+        // Fecha mínima = hoy
+        document.getElementById('rFecha').min = new Date().toISOString().split('T')[0];
+    });
+
+    document.getElementById('btnConfirmarReserva').addEventListener('click', async function () {
+        var nombre   = document.getElementById('rNombre').value.trim();
+        var telefono = document.getElementById('rTelefono').value.trim();
+        var email    = document.getElementById('rEmail').value.trim();
+        var fecha    = document.getElementById('rFecha').value;
+        var hora     = document.getElementById('rHora').value;
+        var personas = document.getElementById('rPersonas').value;
+        var errEl    = document.getElementById('reservaError');
+
+        if (!nombre || !telefono || !email || !fecha || !hora) {
+            errEl.textContent = 'Por favor completa todos los campos requeridos.';
+            errEl.classList.remove('d-none');
+            return;
+        }
+        errEl.classList.add('d-none');
+
+        var btn = this;
+        btn.textContent = 'Buscando mesa disponible…';
+        btn.disabled    = true;
+
+        try {
+            // 1. Buscar mesa disponible en la zona
+            var params = new URLSearchParams({ fecha, hora, personas });
+            if (zonaSeleccionada) params.append('zona', zonaSeleccionada);
+            var resMesas = await fetch('/wp-json/rustica/v1/mesas/disponibles?' + params);
+            var dataMesas = await resMesas.json();
+
+            if (!dataMesas.disponibles || dataMesas.disponibles.length === 0) {
+                errEl.textContent = 'No hay mesas disponibles para ese horario en esta zona. Intenta con otra hora.';
+                errEl.classList.remove('d-none');
+                btn.textContent = 'Confirmar reserva';
+                btn.disabled    = false;
+                return;
+            }
+
+            // 2. Tomar la primera mesa disponible
+            var mesa = dataMesas.disponibles[0];
+            btn.textContent = 'Confirmando…';
+
+            // 3. Crear la reservación
+            var resReserva = await fetch('/wp-json/rustica/v1/reservacion', {
+                method:  'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body:    JSON.stringify({
+                    mesa_id: mesa.id, fecha, hora,
+                    personas: parseInt(personas),
+                    nombre, email, telefono,
+                }),
+            });
+            var dataReserva = await resReserva.json();
+
+            if (dataReserva.checkout_url) {
+                // Zona VIP — redirigir al pago
+                window.location.href = dataReserva.checkout_url;
+                return;
+            }
+
+            // 4. Mostrar confirmación
+            document.getElementById('reservaForm').classList.add('d-none');
+            document.getElementById('reservaExitoMsg').textContent =
+                'Mesa ' + mesa.numero + ' reservada para el ' + fecha + ' a las ' + hora + '. Te enviamos la confirmación a ' + email + '.';
+            document.getElementById('reservaExito').classList.remove('d-none');
+
+        } catch (e) {
+            errEl.textContent = 'Error al procesar la reserva. Intenta de nuevo.';
+            errEl.classList.remove('d-none');
+            btn.textContent = 'Confirmar reserva';
+            btn.disabled    = false;
+        }
+    });
+})();
+</script>
 
 <?php get_footer(); ?>
