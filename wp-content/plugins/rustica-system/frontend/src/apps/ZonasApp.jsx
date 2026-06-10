@@ -12,13 +12,23 @@
  */
 import { useState, useEffect, useCallback } from 'react'
 
+// Resolver la URL de la API dinámicamente según el contexto (WP o Headless)
+const getApiUrl = () => {
+  if (window.RusticaConfig?.apiUrl) {
+    return window.RusticaConfig.apiUrl
+  }
+  const savedUrl = localStorage.getItem('rustica_api_url')
+  return savedUrl ? `${savedUrl}/rustica/v1` : 'http://localhost:8080/wp-json/rustica/v1'
+}
+
 export default function ZonasApp() {
   const [zonas, setZonas]     = useState([])
   const [loading, setLoading] = useState(true)
 
   const cargarZonas = useCallback(async () => {
     try {
-      const res  = await fetch('/wp-json/rustica/v1/zonas')
+      const API = getApiUrl()
+      const res  = await fetch(`${API}/zonas`)
       const data = await res.json()
       setZonas(data.zonas || [])
     } catch (e) {
@@ -46,19 +56,14 @@ export default function ZonasApp() {
 
   if (loading) {
     return (
-      <div style={{ display: 'flex', justifyContent: 'center', padding: 40 }}>
-        <div style={{
-          width: 32, height: 32, borderRadius: '50%',
-          border: '3px solid #333', borderTopColor: '#c9a84c',
-          animation: 'spin .8s linear infinite',
-        }} />
-        <style>{`@keyframes spin { to { transform: rotate(360deg) } }`}</style>
+      <div className="flex justify-center items-center py-12">
+        <div className="w-8 h-8 rounded-full border-2 border-stone-200 border-t-rustica-gold animate-spin" />
       </div>
     )
   }
 
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(260px,1fr))', gap: 16 }}>
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 font-sans">
       {zonas.map(zona => {
         const sinMesas = zona.mesas_libres === 0
 
@@ -66,73 +71,46 @@ export default function ZonasApp() {
           <div
             key={zona.slug}
             onClick={() => !sinMesas && seleccionarZona(zona.slug)}
-            style={{
-              position:    'relative',
-              padding:     24,
-              border:      `1px solid ${sinMesas ? '#444' : 'rgba(201,168,76,.3)'}`,
-              borderRadius: 12,
-              cursor:      sinMesas ? 'not-allowed' : 'pointer',
-              opacity:     sinMesas ? .5 : 1,
-              transition:  'border-color .2s, transform .2s, box-shadow .2s',
-            }}
-            onMouseEnter={e => {
-              if (sinMesas) return
-              e.currentTarget.style.borderColor = '#c9a84c'
-              e.currentTarget.style.transform   = 'translateY(-4px)'
-              e.currentTarget.style.boxShadow   = '0 8px 24px rgba(201,168,76,.2)'
-            }}
-            onMouseLeave={e => {
-              e.currentTarget.style.borderColor = 'rgba(201,168,76,.3)'
-              e.currentTarget.style.transform   = 'translateY(0)'
-              e.currentTarget.style.boxShadow   = 'none'
-            }}
+            className={`relative p-6 bg-rustica-card border rounded-2xl transition-all duration-300 transform ${
+              sinMesas 
+                ? 'border-stone-200 opacity-50 cursor-not-allowed' 
+                : 'border-rustica-gold/20 hover:border-rustica-gold hover:-translate-y-1 hover:shadow-2xl hover:shadow-rustica-gold/10 cursor-pointer'
+            }`}
           >
             {/* Badge "Reservar" solo si hay mesas */}
             {!sinMesas && (
-              <span style={{
-                position:     'absolute', top: 12, right: 14,
-                background:   '#c9a84c',  color: '#1a1a1a',
-                fontSize:     11, fontWeight: 700,
-                padding:      '3px 10px', borderRadius: 20,
-              }}>
+              <span className="absolute top-4 right-4 bg-rustica-gold hover:bg-yellow-600 text-neutral-900 text-[10px] font-bold px-3 py-1 rounded-full shadow-md transition-colors">
                 Reservar →
               </span>
             )}
 
-            <h4 style={{
-              color:       '#c9a84c',
-              fontFamily:  'Playfair Display, serif',
-              marginBottom: 8, marginTop: 0,
-            }}>
+            <h4 className="text-rustica-gold font-serif text-xl font-bold mb-2 pr-16">
               {zona.nombre}
             </h4>
 
-            <p style={{ color: '#aaa', fontSize: 14, marginBottom: 16 }}>
+            <p className="text-stone-500 text-sm mb-6 leading-relaxed">
               {zona.desc}
             </p>
 
             {/* Indicador de mesas — barra + conteo */}
-            <div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 6 }}>
-                <span style={{ fontSize: 12, color: '#888' }}>Mesas disponibles</span>
-                <span style={{
-                  fontSize:   13,
-                  fontWeight: 700,
-                  color:      sinMesas ? '#e74c3c' : '#c9a84c',
-                }}>
-                  {sinMesas ? 'Sin disponibilidad' : `${zona.mesas_libres} / ${zona.total_mesas}`}
+            <div className="mt-auto">
+              <div className="flex justify-between items-center mb-2 text-xs">
+                <span className="text-stone-400 font-medium">Mesas disponibles</span>
+                <span className={`font-bold ${sinMesas ? 'text-rose-500' : 'text-rustica-gold'}`}>
+                  {sinMesas ? 'Agotado' : `${zona.mesas_libres} / ${zona.total_mesas}`}
                 </span>
               </div>
 
               {/* Barra de progreso visual */}
-              <div style={{ height: 4, background: '#333', borderRadius: 2, overflow: 'hidden' }}>
-                <div style={{
-                  height:      '100%',
-                  borderRadius: 2,
-                  background:   sinMesas ? '#e74c3c' : '#c9a84c',
-                  width:        `${zona.total_mesas > 0 ? (zona.mesas_libres / zona.total_mesas) * 100 : 0}%`,
-                  transition:  'width .5s ease',
-                }} />
+              <div className="h-1.5 bg-stone-50 rounded-full overflow-hidden border border-stone-200">
+                <div 
+                  className={`h-full rounded-full transition-all duration-500 ${
+                    sinMesas ? 'bg-rose-600' : 'bg-rustica-gold'
+                  }`}
+                  style={{
+                    width: `${zona.total_mesas > 0 ? (zona.mesas_libres / zona.total_mesas) * 100 : 0}%`,
+                  }} 
+                />
               </div>
             </div>
           </div>

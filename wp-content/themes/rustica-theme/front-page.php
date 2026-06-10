@@ -167,7 +167,7 @@ get_header(); ?>
 </section>
 
 <!-- ZONAS DEL RESTAURANTE — tarjetas PHP con conteo real + botón Reservar -->
-<section id="zonas" class="py-5" style="background:#1a1a1a;">
+<section id="reservas" class="py-5" style="background:#1a1a1a;">
     <div class="container">
         <div class="text-center mb-5">
             <p class="text-uppercase mb-2" style="color:#c9a84c;letter-spacing:.15em;font-size:.8rem;">Nuestros espacios</p>
